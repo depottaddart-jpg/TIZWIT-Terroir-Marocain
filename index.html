@@ -1,0 +1,551 @@
+<!--
+  ╔══════════════════════════════════════════════════════════════╗
+  ║   TIZWIT — Coopérative Artisanale du Terroir Marocain        ║
+  ║   Single-page e-commerce application                         ║
+  ╠══════════════════════════════════════════════════════════════╣
+  ║  SETUP INSTRUCTIONS                                          ║
+  ║  ─────────────────────────────────────────────────────────── ║
+  ║  1. Place all four files in the same folder:                 ║
+  ║       index.html  style.css  script.js  products.json        ║
+  ║                                                              ║
+  ║  2. Open script.js and set your WhatsApp number:             ║
+  ║       const WHATSAPP_NUMBER = "212600000000";                ║
+  ║       (international format, no +, no spaces)                ║
+  ║                                                              ║
+  ║  3. Serve locally (required — fetch() needs HTTP):           ║
+  ║       Option A: VS Code Live Server extension                ║
+  ║       Option B: npx serve .                                  ║
+  ║       Option C: python -m http.server 8000                   ║
+  ║       Then open → http://localhost:8000                      ║
+  ║                                                              ║
+  ║  4. To customise products, edit products.json                ║
+  ║     (id, name, description, price, image, category, badge,   ║
+  ║      weight fields)                                          ║
+  ║                                                              ║
+  ║  5. Replace placeholder images with real product photos:     ║
+  ║     Update the "image" field in products.json with your URLs ║
+  ║                                                              ║
+  ║  CDN dependencies (loaded from jsDelivr/Cloudflare):         ║
+  ║    • Font Awesome 6 (icons)                                  ║
+  ║    • jsPDF 2.5.1 (PDF catalogue generation)                  ║
+  ║    • Google Fonts: Cormorant Garamond + Nunito               ║
+  ╚══════════════════════════════════════════════════════════════╝
+-->
+<!DOCTYPE html>
+<html lang="fr" dir="ltr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="TIZWIT — Coopérative artisanale marocaine. Huile d'argan, miel, amlou, safran et épices du terroir, produits par les femmes artisanes du Maroc.">
+  <meta name="theme-color" content="#C1440E">
+
+  <!-- Open Graph -->
+  <meta property="og:title" content="TIZWIT — Terroir Marocain Authentique">
+  <meta property="og:description" content="Produits artisanaux du terroir marocain — huile d'argan, miel, amlou, safran.">
+  <meta property="og:type" content="website">
+
+  <title>TIZWIT — Coopérative Artisanale Marocaine</title>
+
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+  <!-- Font Awesome 6 -->
+  <link rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
+        crossorigin="anonymous" referrerpolicy="no-referrer">
+
+  <!-- jsPDF (PDF catalogue generation) -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"
+          crossorigin="anonymous" referrerpolicy="no-referrer" defer></script>
+
+  <!-- Site stylesheet -->
+  <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+  <!-- ============================================================
+       DESKTOP NAVBAR
+  ============================================================ -->
+  <nav id="navbar" role="navigation" aria-label="Navigation principale">
+    <div class="navbar-inner">
+      <!-- Logo -->
+      <a href="#home" class="nav-logo" aria-label="TIZWIT — Accueil">
+        <div class="logo-mark">ت</div>
+        <div>
+          <span class="logo-text">TIZWIT</span>
+          <span class="logo-sub">Terroir Marocain</span>
+        </div>
+      </a>
+
+      <!-- Links -->
+      <ul class="nav-links" role="list">
+        <li><a href="#home"     class="active">Accueil</a></li>
+        <li><a href="#produits">Produits</a></li>
+        <li><a href="#livraison">Livraison</a></li>
+        <li><a href="#about">À propos</a></li>
+        <li><a href="#contact">Contact</a></li>
+      </ul>
+
+      <!-- Cart button -->
+      <button class="nav-links" style="background:none;border:none;" aria-label="Ouvrir le panier">
+        <a href="#" class="nav-cart-btn" data-open-cart role="button"
+           aria-label="Panier d'achat">
+          <i class="fa-solid fa-basket-shopping" aria-hidden="true"></i>
+          Panier
+          <span class="cart-badge" aria-live="polite" aria-label="articles dans le panier">0</span>
+        </a>
+      </button>
+    </div>
+  </nav>
+
+  <!-- ============================================================
+       MOBILE BOTTOM NAVBAR
+  ============================================================ -->
+  <nav id="bottom-nav" role="navigation" aria-label="Navigation mobile">
+    <button class="bottom-nav-item active" data-section="home" aria-label="Accueil">
+      <i class="fa-solid fa-house" aria-hidden="true"></i>
+      <span>Accueil</span>
+    </button>
+    <button class="bottom-nav-item" data-section="produits" aria-label="Produits">
+      <i class="fa-solid fa-store" aria-hidden="true"></i>
+      <span>Produits</span>
+    </button>
+    <button class="bottom-nav-item bottom-nav-cart" data-open-cart aria-label="Panier">
+      <i class="fa-solid fa-basket-shopping" aria-hidden="true"></i>
+      <span>Panier</span>
+      <span class="bottom-cart-badge" aria-live="polite" style="display:none">0</span>
+    </button>
+    <button class="bottom-nav-item" data-section="contact" aria-label="Contact">
+      <i class="fa-brands fa-whatsapp" aria-hidden="true"></i>
+      <span>Contact</span>
+    </button>
+  </nav>
+
+  <!-- ============================================================
+       CART OVERLAY + PANEL
+  ============================================================ -->
+  <div id="cart-overlay" role="presentation" aria-hidden="true"></div>
+
+  <aside id="cart-panel" role="complementary" aria-label="Panier d'achat">
+    <!-- Header -->
+    <div class="cart-header zellige-border">
+      <h3><i class="fa-solid fa-basket-shopping" style="color:var(--terracotta);margin-right:.4rem"></i>Mon Panier</h3>
+      <button id="cart-close-btn" class="cart-close" aria-label="Fermer le panier">
+        <i class="fa-solid fa-xmark"></i>
+      </button>
+    </div>
+
+    <!-- Items -->
+    <div id="cart-body" class="cart-body" aria-live="polite">
+      <div class="cart-empty">
+        <i class="fa-solid fa-basket-shopping"></i>
+        <p>Votre panier est vide.</p>
+        <p style="font-size:.8rem;margin-top:.3rem">Explorez nos produits du terroir !</p>
+      </div>
+    </div>
+
+    <!-- Footer -->
+    <div class="cart-footer">
+      <!-- International shipping toggle -->
+      <div class="cart-shipping-toggle">
+        <label class="toggle-switch" for="intl-shipping-toggle" aria-label="Livraison internationale">
+          <input type="checkbox" id="intl-shipping-toggle">
+          <span class="toggle-track"></span>
+        </label>
+        <label for="intl-shipping-toggle">
+          <i class="fa-solid fa-globe" style="color:var(--terracotta);margin-right:.3rem"></i>
+          Livraison internationale (+250 DHS)
+        </label>
+      </div>
+
+      <!-- Summary -->
+      <div id="cart-summary" class="cart-summary" aria-live="polite">
+        <!-- Rendered by JS -->
+      </div>
+
+      <!-- WhatsApp Order Button -->
+      <button id="cart-wa-btn" class="btn-whatsapp" aria-label="Commander via WhatsApp" disabled>
+        <i class="fa-brands fa-whatsapp" aria-hidden="true"></i>
+        Commander via WhatsApp
+      </button>
+    </div>
+  </aside>
+
+  <!-- ============================================================
+       WHATSAPP ORDER MODAL
+  ============================================================ -->
+  <div id="wa-modal-overlay" role="dialog" aria-modal="true"
+       aria-labelledby="wa-modal-title" aria-hidden="true">
+    <div id="wa-modal">
+      <div class="modal-header">
+        <div class="modal-header-text">
+          <h3 id="wa-modal-title">
+            <i class="fa-brands fa-whatsapp" style="color:#25D366;margin-right:.4rem"></i>
+            Finaliser ma commande
+          </h3>
+          <p>Remplissez vos informations pour recevoir votre commande.</p>
+        </div>
+        <button id="wa-modal-close" class="modal-close" aria-label="Fermer">
+          <i class="fa-solid fa-xmark"></i>
+        </button>
+      </div>
+
+      <div class="modal-body">
+        <!-- Order summary preview -->
+        <div id="order-preview" class="order-summary-preview" aria-live="polite">
+          <!-- Rendered by JS -->
+        </div>
+
+        <!-- Customer form -->
+        <form id="wa-order-form" novalidate>
+          <div class="form-group">
+            <label for="wa-name">
+              Nom complet <span aria-hidden="true">*</span>
+            </label>
+            <input type="text" id="wa-name" class="form-input"
+                   placeholder="Ex : Fatima Zahra Benali"
+                   autocomplete="name" required
+                   aria-describedby="wa-name-error">
+            <div id="wa-name-error" class="form-error" role="alert"></div>
+          </div>
+
+          <div class="form-group">
+            <label for="wa-address">
+              Adresse de livraison <span aria-hidden="true">*</span>
+            </label>
+            <textarea id="wa-address" class="form-textarea"
+                      placeholder="Ex : 12 Rue des Rosiers, Résidence Al Andalus, Casablanca 20000"
+                      autocomplete="street-address" required rows="3"
+                      aria-describedby="wa-address-error"></textarea>
+            <div id="wa-address-error" class="form-error" role="alert"></div>
+          </div>
+
+          <button type="submit" class="btn-send-wa">
+            <i class="fa-brands fa-whatsapp" aria-hidden="true"></i>
+            Envoyer ma commande sur WhatsApp
+          </button>
+        </form>
+      </div>
+    </div>
+  </div>
+
+  <!-- ============================================================
+       MAIN CONTENT
+  ============================================================ -->
+  <main id="main-content">
+
+    <!-- ── #HOME ─────────────────────────────────────────────── -->
+    <section id="home" aria-label="Accueil et présentation">
+      <div class="hero-inner">
+        <div class="hero-tag">
+          <i class="fa-solid fa-star" aria-hidden="true"></i>
+          Produits authentiques du terroir marocain
+        </div>
+
+        <h1 class="hero-title">
+          Le <em>meilleur</em> du Maroc<br>
+          livré chez vous
+        </h1>
+
+        <p class="hero-subtitle">
+          Huile d'argan, amlou, miel de montagne, safran de Taliouine…
+          Chaque produit est fabriqué à la main par les artisanes de notre coopérative,
+          dans le respect des traditions amazighes.
+        </p>
+
+        <div class="hero-actions">
+          <a href="#produits" class="btn-primary">
+            <i class="fa-solid fa-store" aria-hidden="true"></i>
+            Découvrir nos produits
+          </a>
+          <button class="btn-secondary catalogue-btn" id="catalogue-btn"
+                  aria-label="Télécharger le catalogue PDF">
+            <i class="fa-solid fa-file-pdf" aria-hidden="true"></i>
+            Catalogue PDF
+          </button>
+        </div>
+
+        <div class="hero-stats" role="list" aria-label="Chiffres clés">
+          <div class="hero-stat" role="listitem">
+            <strong>200+</strong>
+            <span>Artisanes</span>
+          </div>
+          <div class="hero-stat" role="listitem">
+            <strong>15</strong>
+            <span>Régions</span>
+          </div>
+          <div class="hero-stat" role="listitem">
+            <strong>100%</strong>
+            <span>Naturel</span>
+          </div>
+          <div class="hero-stat" role="listitem">
+            <strong>30+</strong>
+            <span>Produits</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ── #PRODUITS ──────────────────────────────────────────── -->
+    <section id="produits" class="section" aria-label="Catalogue produits">
+      <div class="section-inner">
+        <div class="section-header reveal">
+          <span class="section-label">Notre sélection</span>
+          <div class="ornament-divider"><span>✦</span></div>
+          <h2>Produits du Terroir</h2>
+          <p>
+            Chaque article est soigneusement sélectionné pour sa qualité,
+            son authenticité et son respect des savoir-faire traditionnels.
+          </p>
+        </div>
+
+        <!-- Category filter bar -->
+        <div id="filter-bar" class="filter-bar" role="group" aria-label="Filtrer par catégorie">
+          <!-- Populated by JS -->
+        </div>
+
+        <!-- Product grid -->
+        <div id="product-grid" class="product-grid" aria-live="polite" aria-label="Grille de produits">
+          <!-- Populated by JS -->
+        </div>
+      </div>
+    </section>
+
+    <!-- ── #LIVRAISON ─────────────────────────────────────────── -->
+    <section id="livraison" class="section zellige-border" aria-label="Politique de livraison">
+      <div class="section-inner">
+        <div class="section-header reveal">
+          <span class="section-label">Expédition & délais</span>
+          <div class="ornament-divider"><span>✦</span></div>
+          <h2>Politique de Livraison</h2>
+          <p>
+            Nous expédions partout au Maroc et à l'international.
+            Vos commandes sont soigneusement emballées dans des matériaux naturels.
+          </p>
+        </div>
+
+        <div class="shipping-grid">
+          <!-- Card 1 -->
+          <div class="shipping-card reveal">
+            <div class="shipping-icon">
+              <i class="fa-solid fa-truck-fast" aria-hidden="true"></i>
+            </div>
+            <h4>Livraison Nationale</h4>
+            <p>Livraison sous 3 à 5 jours ouvrés partout au Maroc. Suivi de colis en temps réel.</p>
+            <span class="shipping-price">+25 DHS</span>
+          </div>
+
+          <!-- Card 2 -->
+          <div class="shipping-card reveal">
+            <div class="shipping-icon">
+              <i class="fa-solid fa-gift" aria-hidden="true"></i>
+            </div>
+            <h4>Livraison Gratuite</h4>
+            <p>Pour toute commande supérieure à 499 DHS, la livraison au Maroc est offerte.</p>
+            <span class="shipping-price free">GRATUITE dès 499 DHS</span>
+          </div>
+
+          <!-- Card 3 -->
+          <div class="shipping-card reveal">
+            <div class="shipping-icon">
+              <i class="fa-solid fa-globe" aria-hidden="true"></i>
+            </div>
+            <h4>Livraison Internationale</h4>
+            <p>Expédition vers l'Europe, les États-Unis et le Moyen-Orient. Délai 7–14 jours.</p>
+            <span class="shipping-price">+250 DHS (Forfait)</span>
+          </div>
+
+          <!-- Card 4 -->
+          <div class="shipping-card reveal">
+            <div class="shipping-icon">
+              <i class="fa-solid fa-shield-halved" aria-hidden="true"></i>
+            </div>
+            <h4>Emballage Soigné</h4>
+            <p>Vos produits sont emballés dans du papier kraft naturel et protégés avec soin pour garantir leur arrivée en parfait état.</p>
+            <span class="shipping-price">Inclus</span>
+          </div>
+        </div>
+
+        <!-- Shipping summary table -->
+        <div class="reveal" style="margin-top:2.5rem;background:rgba(255,255,255,.06);border:1px solid rgba(212,168,71,.2);border-radius:16px;padding:1.5rem;overflow:auto;">
+          <table style="width:100%;border-collapse:collapse;min-width:400px;" role="table" aria-label="Tableau récapitulatif des frais de livraison">
+            <thead>
+              <tr style="border-bottom:1px solid rgba(212,168,71,.3);">
+                <th style="text-align:left;padding:.6rem 1rem;color:var(--saffron-lt);font-size:.82rem;letter-spacing:.06em;text-transform:uppercase;">Destination</th>
+                <th style="text-align:left;padding:.6rem 1rem;color:var(--saffron-lt);font-size:.82rem;letter-spacing:.06em;text-transform:uppercase;">Montant commande</th>
+                <th style="text-align:right;padding:.6rem 1rem;color:var(--saffron-lt);font-size:.82rem;letter-spacing:.06em;text-transform:uppercase;">Frais</th>
+              </tr>
+            </thead>
+            <tbody style="font-size:.88rem;color:rgba(245,237,216,.85);">
+              <tr style="border-bottom:1px solid rgba(255,255,255,.07);">
+                <td style="padding:.6rem 1rem;"><i class="fa-solid fa-location-dot" style="color:var(--terracotta-lt);margin-right:.4rem"></i>Maroc</td>
+                <td style="padding:.6rem 1rem;">≤ 499 DHS</td>
+                <td style="padding:.6rem 1rem;text-align:right;font-weight:700;">25 DHS</td>
+              </tr>
+              <tr style="border-bottom:1px solid rgba(255,255,255,.07);">
+                <td style="padding:.6rem 1rem;"><i class="fa-solid fa-location-dot" style="color:var(--terracotta-lt);margin-right:.4rem"></i>Maroc</td>
+                <td style="padding:.6rem 1rem;">> 499 DHS</td>
+                <td style="padding:.6rem 1rem;text-align:right;font-weight:700;color:#5EC899;">GRATUIT</td>
+              </tr>
+              <tr>
+                <td style="padding:.6rem 1rem;"><i class="fa-solid fa-globe" style="color:var(--saffron-lt);margin-right:.4rem"></i>International</td>
+                <td style="padding:.6rem 1rem;">Tout montant</td>
+                <td style="padding:.6rem 1rem;text-align:right;font-weight:700;">250 DHS</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </section>
+
+    <!-- ── #ABOUT ──────────────────────────────────────────────── -->
+    <section id="about" class="section" aria-label="À propos de la coopérative">
+      <div class="section-inner">
+        <div class="about-grid">
+          <!-- Image mosaic -->
+          <div class="about-img-mosaic reveal">
+            <img src="https://images.unsplash.com/photo-1539650116574-75c0c6d73f6e?w=600&h=300&fit=crop&auto=format"
+                 alt="Femmes artisanes marocaines au travail" loading="lazy">
+            <img src="https://images.unsplash.com/photo-1608248597279-f99d160bfcbc?w=300&h=200&fit=crop&auto=format"
+                 alt="Fabrication artisanale de l'huile d'argan" loading="lazy">
+            <img src="https://images.unsplash.com/photo-1596040033229-a9821ebd058d?w=300&h=200&fit=crop&auto=format"
+                 alt="Safran de Taliouine" loading="lazy">
+          </div>
+
+          <!-- Content -->
+          <div class="about-content reveal">
+            <span class="section-label">Notre histoire</span>
+            <div class="ornament-divider"><span>✦</span></div>
+            <h2>Tisser le passé,<br><em style="font-style:italic;color:var(--terracotta)">nourrir l'avenir</em></h2>
+
+            <p>
+              Fondée en 2008 dans les contreforts du Moyen-Atlas, <strong>TIZWIT</strong>
+              (« la fleur » en tamazight) regroupe plus de 200 femmes artisanes
+              issues de 15 communes rurales du Maroc.
+            </p>
+            <p>
+              Notre mission est double : préserver les savoir-faire ancestraux transmis
+              de génération en génération, et assurer une rémunération équitable à celles
+              qui perpétuent ces traditions. Chaque pot d'amlou, chaque flacon d'argan
+              porte en lui des heures de travail minutieux et une fierté collective.
+            </p>
+            <p>
+              Nos produits sont certifiés selon les normes de l'ONCA (Office National du
+              Conseil Agricole) et de plusieurs organismes de certification bio européens.
+              Nous n'utilisons ni additifs, ni conservateurs, ni colorants artificiels.
+            </p>
+
+            <div class="about-values" role="list" aria-label="Nos valeurs">
+              <span class="value-chip" role="listitem"><i class="fa-solid fa-leaf"></i> 100% Naturel</span>
+              <span class="value-chip" role="listitem"><i class="fa-solid fa-hands-holding-circle"></i> Commerce équitable</span>
+              <span class="value-chip" role="listitem"><i class="fa-solid fa-award"></i> Certifié Bio</span>
+              <span class="value-chip" role="listitem"><i class="fa-solid fa-recycle"></i> Éco-responsable</span>
+              <span class="value-chip" role="listitem"><i class="fa-solid fa-heart"></i> Fait à la main</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ── #CONTACT ────────────────────────────────────────────── -->
+    <section id="contact" class="section" aria-label="Nous contacter">
+      <div class="section-inner">
+        <div class="section-header reveal">
+          <span class="section-label">Restons en contact</span>
+          <div class="ornament-divider"><span>✦</span></div>
+          <h2>Contactez-nous</h2>
+          <p>
+            Notre équipe est disponible 7j/7 pour répondre à vos questions,
+            personnaliser votre commande ou organiser une livraison sur mesure.
+          </p>
+        </div>
+
+        <div class="contact-grid">
+          <!-- WhatsApp card -->
+          <div class="contact-card reveal" id="contact-wa-card" role="button" tabindex="0"
+               aria-label="Nous contacter sur WhatsApp">
+            <div class="contact-icon">
+              <i class="fa-brands fa-whatsapp" aria-hidden="true"></i>
+            </div>
+            <h4>WhatsApp</h4>
+            <p>Réponse rapide, conseils produits et suivi de commande en direct.</p>
+            <p style="margin-top:.5rem;font-weight:700;color:var(--terracotta);font-size:.9rem">
+              +212 600 00 00 00
+            </p>
+          </div>
+
+          <!-- Email card -->
+          <div class="contact-card reveal" id="contact-email-card" role="button" tabindex="0"
+               aria-label="Nous envoyer un email">
+            <div class="contact-icon">
+              <i class="fa-solid fa-envelope" aria-hidden="true"></i>
+            </div>
+            <h4>Email</h4>
+            <p>Pour les commandes en gros, les partenariats et la presse.</p>
+            <p style="margin-top:.5rem;font-weight:700;color:var(--terracotta);font-size:.9rem">
+              contact@tizwit.ma
+            </p>
+          </div>
+
+          <!-- Location card -->
+          <div class="contact-card reveal">
+            <div class="contact-icon">
+              <i class="fa-solid fa-map-pin" aria-hidden="true"></i>
+            </div>
+            <h4>Siège social</h4>
+            <p>Visitez notre atelier et découvrez nos produits sur place.</p>
+            <p style="margin-top:.5rem;font-weight:700;color:var(--terracotta);font-size:.9rem">
+              Azilal, Béni Mellal-Khénifra<br>Maroc
+            </p>
+          </div>
+        </div>
+
+        <!-- Social & catalogue CTA -->
+        <div class="text-center mt-3 reveal">
+          <div class="ornament-divider"><span>✦</span></div>
+          <p style="margin-bottom:1rem">Téléchargez notre catalogue complet pour partager nos produits.</p>
+          <button class="catalogue-btn" id="catalogue-btn-contact" onclick="downloadCatalogue()"
+                  aria-label="Télécharger le catalogue PDF">
+            <i class="fa-solid fa-file-pdf" aria-hidden="true"></i>
+            Télécharger le catalogue PDF
+          </button>
+        </div>
+      </div>
+    </section>
+
+  </main><!-- /main -->
+
+  <!-- ============================================================
+       FOOTER
+  ============================================================ -->
+  <footer role="contentinfo">
+    <div class="footer-inner">
+      <div class="footer-logo">TIZWIT</div>
+      <div class="footer-tagline">Coopérative Artisanale du Terroir Marocain</div>
+      <div class="ornament-divider"><span>✦</span></div>
+      <p style="font-size:.82rem;color:rgba(245,237,216,.6);max-width:500px;margin:0 auto;">
+        Chaque achat soutient directement les femmes artisanes de notre coopérative.
+        Merci de faire confiance au savoir-faire marocain authentique.
+      </p>
+      <div class="footer-divider"></div>
+      <div class="footer-bottom">
+        &copy; <span id="footer-year"></span> TIZWIT — Tous droits réservés.
+        Fait avec <span style="color:var(--terracotta-lt)">♥</span> au Maroc.
+      </div>
+    </div>
+  </footer>
+
+  <!-- Toast notifications container -->
+  <div id="toast-container" aria-live="polite" aria-atomic="true"></div>
+
+  <!-- Footer year auto-update -->
+  <script>
+    document.getElementById("footer-year").textContent = new Date().getFullYear();
+  </script>
+
+  <!-- Main application script -->
+  <script src="script.js"></script>
+</body>
+</html>

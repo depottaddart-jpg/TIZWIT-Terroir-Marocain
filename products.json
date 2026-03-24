@@ -1,0 +1,122 @@
+[
+  {
+    "id": 1,
+    "name": "Amlou de l'Atlas",
+    "description": "Mélange traditionnel d'amandes grillées, d'huile d'argan pure et de miel sauvage. Préparé à la main selon les recettes ancestrales des femmes amazighes. Idéal avec du pain msemen au petit-déjeuner.",
+    "price": 85,
+    "image": "https://images.unsplash.com/photo-1601013407627-4e7f9e8c6c01?w=400&h=400&fit=crop&auto=format",
+    "category": "Pâtes & Tapenades",
+    "badge": "Coup de cœur",
+    "weight": "250g"
+  },
+  {
+    "id": 2,
+    "name": "Miel de Thym Sauvage",
+    "description": "Récolté dans les garrigues du Haut-Atlas à plus de 1800m d'altitude. Ce miel cru, non pasteurisé, offre des arômes intenses de thym sauvage et de fleurs de montagne. Riche en antioxydants.",
+    "price": 120,
+    "image": "https://images.unsplash.com/photo-1558642452-9d2a7deb7f62?w=400&h=400&fit=crop&auto=format",
+    "category": "Miels",
+    "badge": "Bio",
+    "weight": "500g"
+  },
+  {
+    "id": 3,
+    "name": "Huile d'Argan Cosmétique",
+    "description": "Première pression à froid, extraite des noix d'arganier par les femmes de la coopérative. Cette huile d'or liquide nourrit la peau et les cheveux en profondeur. Certifiée 100% pure.",
+    "price": 180,
+    "image": "https://images.unsplash.com/photo-1608248597279-f99d160bfcbc?w=400&h=400&fit=crop&auto=format",
+    "category": "Huiles",
+    "badge": "Premium",
+    "weight": "100ml"
+  },
+  {
+    "id": 4,
+    "name": "Huile d'Olive Vierge Extra",
+    "description": "Pressée à froid dans notre moulin traditionnel de Meknès. Variété Picholine marocaine aux reflets dorés, avec des notes de pomme verte et d'artichaut. Acidité inférieure à 0,5%.",
+    "price": 95,
+    "image": "https://images.unsplash.com/photo-1474979266404-7eaacbcd87c5?w=400&h=400&fit=crop&auto=format",
+    "category": "Huiles",
+    "badge": null,
+    "weight": "500ml"
+  },
+  {
+    "id": 5,
+    "name": "Safran de Taliouine",
+    "description": "L'or rouge du Maroc, cultivé dans la vallée de Taliouine, capitale mondiale du safran. Filaments entiers de qualité Category I. Arôme puissant, couleur intense. Récolte manuelle.",
+    "price": 220,
+    "image": "https://images.unsplash.com/photo-1596040033229-a9821ebd058d?w=400&h=400&fit=crop&auto=format",
+    "category": "Épices",
+    "badge": "Rare",
+    "weight": "2g"
+  },
+  {
+    "id": 6,
+    "name": "Ras El Hanout Maison",
+    "description": "Notre mélange secret de 27 épices torréfiées et moulues à la main : curcuma, gingembre, cannelle, coriandre, cardamome et bien d'autres. La signature olfactive de la cuisine marocaine authentique.",
+    "price": 65,
+    "image": "https://images.unsplash.com/photo-1544025162-d76594e8cef1?w=400&h=400&fit=crop&auto=format",
+    "category": "Épices",
+    "badge": null,
+    "weight": "150g"
+  },
+  {
+    "id": 7,
+    "name": "Huile d'Argan Culinaire",
+    "description": "Extraite d'amandes d'argan légèrement grillées, cette huile dégage un arôme de noisette unique. Filet sur couscous, salades ou tajines. Conditionnée en bouteille artisanale en verre soufflé.",
+    "price": 145,
+    "image": "https://images.unsplash.com/photo-1589820296156-2454bb8a6ad1?w=400&h=400&fit=crop&auto=format",
+    "category": "Huiles",
+    "badge": "Artisanal",
+    "weight": "250ml"
+  },
+  {
+    "id": 8,
+    "name": "Miel de Jujubier (Sidr)",
+    "description": "Exceptionnel miel monofloral issu des fleurs de jujubier du Sud marocain. Texture crémeuse, couleur ambrée foncée, douceur enveloppante. Très prisé pour ses vertus thérapeutiques traditionnelles.",
+    "price": 195,
+    "image": "https://images.unsplash.com/photo-1587049352846-4a222e784d38?w=400&h=400&fit=crop&auto=format",
+    "category": "Miels",
+    "badge": "Premium",
+    "weight": "500g"
+  },
+  {
+    "id": 9,
+    "name": "Cumin de Marrakech",
+    "description": "Cumin entier cultivé dans la plaine du Haouz, séché naturellement au soleil du désert. Grain de taille uniforme, huiles essentielles préservées. Base incontournable de la cuisine marocaine.",
+    "price": 35,
+    "image": "https://images.unsplash.com/photo-1599940824399-b87987ceb72a?w=400&h=400&fit=crop&auto=format",
+    "category": "Épices",
+    "badge": null,
+    "weight": "200g"
+  },
+  {
+    "id": 10,
+    "name": "Coffret Découverte Terroir",
+    "description": "Notre sélection prestige : 1 pot d'amlou, 1 miel de thym (250g), 1 flacon d'huile d'argan culinaire (100ml) et un sachet de safran (1g). Présenté dans un coffret en bois d'olivier gravé.",
+    "price": 350,
+    "image": "https://images.unsplash.com/photo-1513475382585-d06e58bcb0e0?w=400&h=400&fit=crop&auto=format",
+    "category": "Coffrets Cadeaux",
+    "badge": "Bestseller",
+    "weight": "Coffret"
+  },
+  {
+    "id": 11,
+    "name": "Rose du Dadès Séchée",
+    "description": "Pétales de roses Damask cueillis à l'aube dans la vallée des Roses, séchés à l'ombre pour préserver leurs arômes. Usage culinaire (couscous, pâtisseries) ou décoratif. Parfum enivrant.",
+    "price": 45,
+    "image": "https://images.unsplash.com/photo-1548248823-ce16a73b6d49?w=400&h=400&fit=crop&auto=format",
+    "category": "Épices",
+    "badge": null,
+    "weight": "50g"
+  },
+  {
+    "id": 12,
+    "name": "Ghee au Beurre de Brebis",
+    "description": "Smen artisanal clarifié, préparé selon la tradition des nomades du Moyen-Atlas. Affiné plusieurs mois en jarre de terre, il confère une saveur incomparable aux tajines et sauces cuisinées.",
+    "price": 110,
+    "image": "https://images.unsplash.com/photo-1505252585461-04db1eb84625?w=400&h=400&fit=crop&auto=format",
+    "category": "Pâtes & Tapenades",
+    "badge": "Traditionnel",
+    "weight": "300g"
+  }
+]
