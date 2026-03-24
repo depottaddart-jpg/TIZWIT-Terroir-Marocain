@@ -610,7 +610,7 @@ function initScrollReveal() {
 }
 
 // ─────────────────────────────────────────────────────────────────
-// PDF CATALOGUE (version finale corrigée)
+// PDF CATALOGUE — version finale corrigée
 // ─────────────────────────────────────────────────────────────────
 function initCatalogueBtn() {
   document.getElementById("catalogue-btn")?.addEventListener("click", downloadCatalogue);
@@ -618,7 +618,7 @@ function initCatalogueBtn() {
 
 /**
  * Charge une image distante et retourne une dataURL.
- * En cas d'échec (CORS, réseau…), renvoie un placeholder gris.
+ * Gère les erreurs CORS et renvoie un placeholder gris.
  */
 function loadImageAsDataURL(url) {
   return new Promise((resolve) => {
@@ -635,7 +635,7 @@ function loadImageAsDataURL(url) {
     };
     img.onerror = () => {
       console.warn(`Impossible de charger l'image : ${url}`);
-      // Placeholder gris avec texte
+      // Placeholder gris
       const canvas = document.createElement("canvas");
       canvas.width = 400;
       canvas.height = 300;
@@ -681,15 +681,14 @@ async function downloadCatalogue() {
   const pageH = doc.internal.pageSize.getHeight();  // 297 mm
   const margin = 15;
   const usableW = pageW - 2 * margin;
-  const colW = usableW / 3;          // largeur d'une colonne (~60 mm)
-  const imgW = colW - 6;              // largeur de l'image (~54 mm)
-  const imgH = 35;                    // hauteur de l'image (35 mm)
-  const textBlockH = 12;              // hauteur réservée pour le texte (nom + prix + poids)
-  const rowH = imgH + textBlockH;     // hauteur totale d'une ligne = 47 mm
+  const colW = usableW / 3;          // ~60 mm
+  const imgW = colW - 6;              // ~54 mm
+  const imgH = 35;                    // hauteur image
+  const rowH = 47;                    // hauteur totale d'une ligne (image + texte)
   const rowsPerPage = 5;              // 5 lignes par page
-  const productsPerPage = rowsPerPage * 3;  // 15 produits par page
+  const productsPerPage = 15;         // 5 lignes × 3 colonnes
 
-  // --- Page de garde (inchangée) ---
+  // --- Page de garde (identique à l'original) ---
   function addCoverPage() {
     doc.setFillColor(193, 68, 14);
     doc.rect(0, 0, pageW, 70, "F");
@@ -722,27 +721,26 @@ async function downloadCatalogue() {
 
   // --- Génération des pages produits ---
   const totalProducts = products.length;
-  let yStart = 110; // position de la première ligne après la page de garde
+  let yStart = 110; // départ après la page de garde
 
   for (let i = 0; i < totalProducts; i++) {
     const product = products[i];
     const imgData = imagesDataURL[i];
 
-    // Position dans la grille
+    // Calcul de la page et de la position dans la grille
     const pageIndex = Math.floor(i / productsPerPage);
     const posInPage = i % productsPerPage;
     const row = Math.floor(posInPage / 3);
     const col = posInPage % 3;
 
-    // Si on change de page (et que ce n'est pas la première page de produits)
+    // Ajouter une nouvelle page si besoin (sauf pour la première page de produits)
     if (pageIndex > 0 && posInPage === 0) {
       doc.addPage();
-      yStart = 20; // réinitialiser le y en haut de la page
+      yStart = 20; // réinitialiser en haut
     }
 
-    // Calcul des coordonnées
     const yPos = yStart + row * rowH;
-    const xPos = margin + col * colW + 3; // léger padding à gauche
+    const xPos = margin + col * colW + 3; // léger padding
 
     // --- Image ---
     try {
@@ -755,7 +753,7 @@ async function downloadCatalogue() {
       doc.text("Image non disponible", xPos + imgW/2, yPos + imgH/2, { align: "center" });
     }
 
-    // --- Nom (multi‑lignes) ---
+    // --- Nom (gestion multi‑lignes) ---
     doc.setTextColor(43, 27, 16);
     doc.setFontSize(9);
     doc.setFont("helvetica", "bold");
@@ -763,7 +761,7 @@ async function downloadCatalogue() {
     let textY = yPos + imgH + 2;
     for (let l = 0; l < nameLines.length; l++) {
       doc.text(nameLines[l], xPos, textY);
-      textY += 3.5; // interligne
+      textY += 3.5;
     }
 
     // --- Prix ---
@@ -781,7 +779,7 @@ async function downloadCatalogue() {
     }
   }
 
-  // --- Page finale avec les infos de contact ---
+  // --- Page finale avec les informations de contact ---
   doc.addPage();
   const finalY = 70;
   doc.setFillColor(44, 85, 69);
@@ -795,9 +793,20 @@ async function downloadCatalogue() {
   doc.text(`wa.me/${WHATSAPP_NUMBER}`, pageW / 2, finalY + 14, { align: "center" });
   doc.text("Livraison gratuite dès 499 DHS • Produits 100% authentiques", pageW / 2, finalY + 20, { align: "center" });
 
+  // Sauvegarde finale
   doc.save("TIZWIT_Catalogue_Produits.pdf");
   showToast("Catalogue PDF téléchargé ! 📄", "success");
 }
+
+/** Wait for jsPDF to become available (loaded async by CDN) */
+function waitForjsPDF(attempts = 0) {
+  return new Promise((resolve, reject) => {
+    if (window.jspdf) return resolve();
+    if (attempts > 20) return reject(new Error("jsPDF non disponible"));
+    setTimeout(() => waitForjsPDF(attempts + 1).then(resolve).catch(reject), 200);
+  });
+}
+
 // ─────────────────────────────────────────────────────────────────
 // CONTACT CARDS
 // ─────────────────────────────────────────────────────────────────
