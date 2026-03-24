@@ -610,7 +610,7 @@ function initScrollReveal() {
 }
 
 // ─────────────────────────────────────────────────────────────────
-// PDF CATALOGUE (version corrigée avec gestion des images .webp)
+// PDF CATALOGUE (version finale corrigée)
 // ─────────────────────────────────────────────────────────────────
 function initCatalogueBtn() {
   document.getElementById("catalogue-btn")?.addEventListener("click", downloadCatalogue);
@@ -618,55 +618,37 @@ function initCatalogueBtn() {
 
 /**
  * Charge une image distante et retourne une dataURL.
- * Gère les erreurs CORS et les formats .webp en utilisant un proxy CORS si nécessaire.
- * En cas d'échec, retourne un placeholder.
+ * En cas d'échec (CORS, réseau…), renvoie un placeholder gris.
  */
-async function loadImageAsDataURL(url) {
-  // Si l'URL est déjà un dataURL ou un placeholder, on la retourne directement
-  if (url.startsWith('data:') || url.startsWith('https://via.placeholder.com')) {
-    return url;
-  }
-
-  // Tentative de chargement direct
-  const tryLoad = (src) => {
-    return new Promise((resolve) => {
-      const img = new Image();
-      img.crossOrigin = "Anonymous";
-      img.onload = () => {
-        const canvas = document.createElement("canvas");
-        canvas.width = img.width;
-        canvas.height = img.height;
-        const ctx = canvas.getContext("2d");
-        ctx.drawImage(img, 0, 0);
-        resolve(canvas.toDataURL("image/jpeg", 0.85));
-      };
-      img.onerror = () => resolve(null);
-      img.src = src;
-    });
-  };
-
-  let dataURL = await tryLoad(url);
-  if (dataURL) return dataURL;
-
-  // Si échec direct, essayer avec un proxy CORS (ici un proxy public, mais vous pouvez utiliser le vôtre)
-  // Note : l'utilisation d'un proxy public peut être limitée; pour un usage en production, préférez un proxy local.
-  const proxyUrl = `https://cors-anywhere.herokuapp.com/${url}`;
-  dataURL = await tryLoad(proxyUrl);
-  if (dataURL) return dataURL;
-
-  // Dernier recours : générer un placeholder
-  console.warn(`Impossible de charger l'image : ${url}`);
-  const canvas = document.createElement("canvas");
-  canvas.width = 400;
-  canvas.height = 300;
-  const ctx = canvas.getContext("2d");
-  ctx.fillStyle = "#F5EDD8";
-  ctx.fillRect(0, 0, canvas.width, canvas.height);
-  ctx.fillStyle = "#C1440E";
-  ctx.font = "bold 20px sans-serif";
-  ctx.textAlign = "center";
-  ctx.fillText("Image", canvas.width/2, canvas.height/2);
-  return canvas.toDataURL("image/jpeg");
+function loadImageAsDataURL(url) {
+  return new Promise((resolve) => {
+    const img = new Image();
+    img.crossOrigin = "Anonymous";
+    img.onload = () => {
+      const canvas = document.createElement("canvas");
+      canvas.width = img.width;
+      canvas.height = img.height;
+      const ctx = canvas.getContext("2d");
+      ctx.drawImage(img, 0, 0);
+      const dataURL = canvas.toDataURL("image/jpeg", 0.85);
+      resolve(dataURL);
+    };
+    img.onerror = () => {
+      console.warn(`Impossible de charger l'image : ${url}`);
+      // Placeholder gris avec texte
+      const canvas = document.createElement("canvas");
+      canvas.width = 400;
+      canvas.height = 300;
+      const ctx = canvas.getContext("2d");
+      ctx.fillStyle = "#F5EDD8";
+      ctx.fillRect(0, 0, canvas.width, canvas.height);
+      ctx.fillStyle = "#C1440E";
+      ctx.font = "bold 20px sans-serif";
+      ctx.fillText("Image", canvas.width/2 - 40, canvas.height/2);
+      resolve(canvas.toDataURL("image/jpeg"));
+    };
+    img.src = url;
+  });
 }
 
 async function downloadCatalogue() {
@@ -688,7 +670,7 @@ async function downloadCatalogue() {
 
   showToast("Préparation des images… (peut prendre quelques secondes)", "");
 
-  // Charger toutes les images en dataURL (avec gestion d'erreur)
+  // Charger toutes les images en dataURL
   const imagesDataURL = await Promise.all(products.map(p => loadImageAsDataURL(p.image)));
 
   const { jsPDF } = window.jspdf;
@@ -699,14 +681,15 @@ async function downloadCatalogue() {
   const pageH = doc.internal.pageSize.getHeight();  // 297 mm
   const margin = 15;
   const usableW = pageW - 2 * margin;
-  const colW = usableW / 3;          // largeur d'une colonne (environ 60 mm)
-  const imgW = colW - 8;              // largeur image (56 mm)
-  const imgH = 35;                    // hauteur image (35 mm)
-  const rowH = 53;                    // hauteur totale d'une ligne (35 image + 18 texte)
+  const colW = usableW / 3;          // largeur d'une colonne (~60 mm)
+  const imgW = colW - 6;              // largeur de l'image (~54 mm)
+  const imgH = 35;                    // hauteur de l'image (35 mm)
+  const textBlockH = 12;              // hauteur réservée pour le texte (nom + prix + poids)
+  const rowH = imgH + textBlockH;     // hauteur totale d'une ligne = 47 mm
   const rowsPerPage = 5;              // 5 lignes par page
-  const productsPerPage = 15;         // 5 lignes * 3 colonnes
+  const productsPerPage = rowsPerPage * 3;  // 15 produits par page
 
-  // --- Fonction pour ajouter la page de garde (inchangée) ---
+  // --- Page de garde (inchangée) ---
   function addCoverPage() {
     doc.setFillColor(193, 68, 14);
     doc.rect(0, 0, pageW, 70, "F");
@@ -735,46 +718,36 @@ async function downloadCatalogue() {
     doc.text(introLines, margin, 82);
   }
 
-  // --- Page de garde ---
   addCoverPage();
 
   // --- Génération des pages produits ---
-  let totalProducts = products.length;
+  const totalProducts = products.length;
   let yStart = 110; // position de la première ligne après la page de garde
 
   for (let i = 0; i < totalProducts; i++) {
     const product = products[i];
     const imgData = imagesDataURL[i];
 
-    // Déterminer la page (0 = première page de produits)
+    // Position dans la grille
     const pageIndex = Math.floor(i / productsPerPage);
-    const positionInPage = i % productsPerPage;
-    const row = Math.floor(positionInPage / 3);
-    const col = positionInPage % 3;
+    const posInPage = i % productsPerPage;
+    const row = Math.floor(posInPage / 3);
+    const col = posInPage % 3;
 
-    // Si on change de page (et que ce n'est pas la première)
-    if (pageIndex > 0 && positionInPage === 0) {
+    // Si on change de page (et que ce n'est pas la première page de produits)
+    if (pageIndex > 0 && posInPage === 0) {
       doc.addPage();
-      yStart = 20; // réinitialiser le y en haut
+      yStart = 20; // réinitialiser le y en haut de la page
     }
 
-    // Calculer yPos : départ = yStart + row * rowH
-    let yPos = yStart + row * rowH;
+    // Calcul des coordonnées
+    const yPos = yStart + row * rowH;
+    const xPos = margin + col * colW + 3; // léger padding à gauche
 
-    // Sécurité : si la position dépasse la hauteur, on force un saut de page (rare)
-    if (yPos + rowH > pageH - margin) {
-      doc.addPage();
-      yStart = 20;
-      yPos = yStart + row * rowH;
-    }
-
-    const xPos = margin + col * colW + 4; // centrage horizontal avec un petit padding
-
-    // --- Ajouter l'image ---
+    // --- Image ---
     try {
       doc.addImage(imgData, "JPEG", xPos, yPos, imgW, imgH, undefined, "FAST");
     } catch (e) {
-      // Fallback en cas d'erreur d'image
       doc.setFillColor(245, 237, 216);
       doc.rect(xPos, yPos, imgW, imgH, "F");
       doc.setTextColor(193, 68, 14);
@@ -782,25 +755,29 @@ async function downloadCatalogue() {
       doc.text("Image non disponible", xPos + imgW/2, yPos + imgH/2, { align: "center" });
     }
 
-    // --- Nom du produit (avec wrap automatique) ---
+    // --- Nom (multi‑lignes) ---
     doc.setTextColor(43, 27, 16);
     doc.setFontSize(9);
     doc.setFont("helvetica", "bold");
     const nameLines = doc.splitTextToSize(product.name, imgW);
-    doc.text(nameLines, xPos, yPos + imgH + 3);
+    let textY = yPos + imgH + 2;
+    for (let l = 0; l < nameLines.length; l++) {
+      doc.text(nameLines[l], xPos, textY);
+      textY += 3.5; // interligne
+    }
 
     // --- Prix ---
     doc.setTextColor(193, 68, 14);
     doc.setFontSize(10);
     doc.setFont("helvetica", "bold");
-    doc.text(`${product.price.toFixed(0)} DHS`, xPos, yPos + imgH + 12);
+    doc.text(`${product.price.toFixed(0)} DHS`, xPos, textY + 2);
 
     // --- Poids ---
     if (product.weight) {
       doc.setTextColor(90, 62, 40);
       doc.setFontSize(7);
       doc.setFont("helvetica", "normal");
-      doc.text(product.weight, xPos, yPos + imgH + 18);
+      doc.text(product.weight, xPos, textY + 7);
     }
   }
 
@@ -818,20 +795,9 @@ async function downloadCatalogue() {
   doc.text(`wa.me/${WHATSAPP_NUMBER}`, pageW / 2, finalY + 14, { align: "center" });
   doc.text("Livraison gratuite dès 499 DHS • Produits 100% authentiques", pageW / 2, finalY + 20, { align: "center" });
 
-  // Sauvegarde du PDF
   doc.save("TIZWIT_Catalogue_Produits.pdf");
   showToast("Catalogue PDF téléchargé ! 📄", "success");
 }
-
-/** Wait for jsPDF to become available (loaded async by CDN) */
-function waitForjsPDF(attempts = 0) {
-  return new Promise((resolve, reject) => {
-    if (window.jspdf) return resolve();
-    if (attempts > 20) return reject(new Error("jsPDF non disponible"));
-    setTimeout(() => waitForjsPDF(attempts + 1).then(resolve).catch(reject), 200);
-  });
-}
-
 // ─────────────────────────────────────────────────────────────────
 // CONTACT CARDS
 // ─────────────────────────────────────────────────────────────────
