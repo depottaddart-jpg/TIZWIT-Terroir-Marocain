@@ -610,17 +610,31 @@ function initScrollReveal() {
 }
 
 // ─────────────────────────────────────────────────────────────────
-// PDF CATALOGUE — version finale corrigée
+// PDF CATALOGUE — version avec conversion via images.weserv.nl
 // ─────────────────────────────────────────────────────────────────
 function initCatalogueBtn() {
   document.getElementById("catalogue-btn")?.addEventListener("click", downloadCatalogue);
 }
 
 /**
- * Charge une image distante et retourne une dataURL.
- * Gère les erreurs CORS et renvoie un placeholder gris.
+ * Convertit une URL d'image (Blogger WebP) en JPEG via https://images.weserv.nl/
+ * pour garantir la compatibilité avec jsPDF.
  */
-function loadImageAsDataURL(url) {
+function getConvertedImageUrl(originalUrl) {
+  // Encoder l'URL d'origine pour l'utiliser comme paramètre
+  const encodedUrl = encodeURIComponent(originalUrl);
+  // Utiliser le service weserv.nl avec les options : format=jpeg, qualité=85, largeur=500 (taille raisonnable)
+  return `https://images.weserv.nl/?url=${encodedUrl}&w=500&output=jpeg&q=85`;
+}
+
+/**
+ * Charge une image distante et retourne une dataURL.
+ * Utilise le service weserv.nl pour convertir WebP en JPEG.
+ */
+function loadImageAsDataURL(originalUrl) {
+  // Utiliser l'URL convertie pour le chargement
+  const convertedUrl = getConvertedImageUrl(originalUrl);
+  
   return new Promise((resolve) => {
     const img = new Image();
     img.crossOrigin = "Anonymous";
@@ -634,7 +648,7 @@ function loadImageAsDataURL(url) {
       resolve(dataURL);
     };
     img.onerror = () => {
-      console.warn(`Impossible de charger l'image : ${url}`);
+      console.warn(`Impossible de charger l'image via weserv.nl : ${originalUrl}`);
       // Placeholder gris
       const canvas = document.createElement("canvas");
       canvas.width = 400;
@@ -647,7 +661,7 @@ function loadImageAsDataURL(url) {
       ctx.fillText("Image", canvas.width/2 - 40, canvas.height/2);
       resolve(canvas.toDataURL("image/jpeg"));
     };
-    img.src = url;
+    img.src = convertedUrl;
   });
 }
 
@@ -670,7 +684,7 @@ async function downloadCatalogue() {
 
   showToast("Préparation des images… (peut prendre quelques secondes)", "");
 
-  // Charger toutes les images en dataURL
+  // Charger toutes les images en dataURL via weserv.nl
   const imagesDataURL = await Promise.all(products.map(p => loadImageAsDataURL(p.image)));
 
   const { jsPDF } = window.jspdf;
