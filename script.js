@@ -690,17 +690,17 @@ async function downloadCatalogue() {
   const { jsPDF } = window.jspdf;
   const doc = new jsPDF({ unit: "mm", format: "a4", orientation: "portrait" });
 
-  // Dimensions et marges
+   // Dimensions et marges
   const pageW = doc.internal.pageSize.getWidth();   // 210 mm
   const pageH = doc.internal.pageSize.getHeight();  // 297 mm
   const margin = 15;
   const usableW = pageW - 2 * margin;
   const colW = usableW / 3;          // ~60 mm
   const imgW = colW - 6;              // ~54 mm
-  const imgH = 35;                    // hauteur image
-  const rowH = 47;                    // hauteur totale d'une ligne (image + texte)
-  const rowsPerPage = 5;              // 5 lignes par page
-  const productsPerPage = 15;         // 5 lignes × 3 colonnes
+  const imgH = 38;                    // hauteur image légèrement augmentée
+  const rowH = 52;                    // hauteur totale d'une ligne (image + texte) - 4 lignes tiennent sur page
+  const rowsPerPage = 4;              // 4 lignes par page
+  const productsPerPage = 12;         // 3 colonnes × 4 lignes = 12 produits
 
   // --- Page de garde (identique à l'original) ---
   function addCoverPage() {
