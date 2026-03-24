@@ -610,7 +610,7 @@ function initScrollReveal() {
 }
 
 // ─────────────────────────────────────────────────────────────────
-// PDF CATALOGUE
+// PDF CATALOGUE (version corrigée)
 // ─────────────────────────────────────────────────────────────────
 function initCatalogueBtn() {
   document.getElementById("catalogue-btn")?.addEventListener("click", downloadCatalogue);
@@ -618,41 +618,43 @@ function initCatalogueBtn() {
 
 /**
  * Charge une image distante et retourne une dataURL.
- * @param {string} url - L'URL de l'image.
- * @returns {Promise<string>} - Promesse résolue avec la dataURL.
+ * Gère les erreurs CORS et renvoie un placeholder en cas d'échec.
  */
 function loadImageAsDataURL(url) {
-  return new Promise((resolve, reject) => {
+  return new Promise((resolve) => {
     const img = new Image();
-    img.crossOrigin = "Anonymous"; // Pour éviter les problèmes CORS (si l'image l'autorise)
+    img.crossOrigin = "Anonymous";
     img.onload = () => {
       const canvas = document.createElement("canvas");
       canvas.width = img.width;
       canvas.height = img.height;
       const ctx = canvas.getContext("2d");
       ctx.drawImage(img, 0, 0);
-      const dataURL = canvas.toDataURL("image/jpeg", 0.8); // format JPEG pour réduire la taille
+      const dataURL = canvas.toDataURL("image/jpeg", 0.85);
       resolve(dataURL);
     };
-    img.onerror = (err) => {
+    img.onerror = () => {
       console.warn(`Impossible de charger l'image : ${url}`);
-      // Retourne un placeholder en dataURL
-      resolve("https://via.placeholder.com/400x300/F5EDD8/C1440E?text=Image+indisponible");
+      // Placeholder en dataURL (cercle gris avec texte)
+      const canvas = document.createElement("canvas");
+      canvas.width = 400;
+      canvas.height = 300;
+      const ctx = canvas.getContext("2d");
+      ctx.fillStyle = "#F5EDD8";
+      ctx.fillRect(0, 0, canvas.width, canvas.height);
+      ctx.fillStyle = "#C1440E";
+      ctx.font = "bold 20px sans-serif";
+      ctx.fillText("Image", canvas.width/2 - 40, canvas.height/2);
+      resolve(canvas.toDataURL("image/jpeg"));
     };
     img.src = url;
   });
 }
 
-/**
- * Génère le catalogue PDF avec une grille de produits :
- * - 3 produits par ligne
- * - 5 lignes par page (soit 15 produits par page)
- * - Chaque produit affiche : image, nom, prix, poids
- */
 async function downloadCatalogue() {
-  // Attendre que jsPDF soit chargé
+  // Vérifier que jsPDF est chargé
   if (typeof window.jspdf === "undefined") {
-    showToast("Chargement de la bibliothèque PDF…", "");
+    showToast("Chargement du générateur PDF…", "");
     try {
       await waitForjsPDF();
     } catch (err) {
@@ -661,7 +663,6 @@ async function downloadCatalogue() {
     }
   }
 
-  // Vérifier que les produits sont disponibles
   if (!products || products.length === 0) {
     showToast("Aucun produit à afficher dans le catalogue.", "error");
     return;
@@ -669,22 +670,25 @@ async function downloadCatalogue() {
 
   showToast("Préparation des images… (peut prendre quelques secondes)", "");
 
-  // Charger toutes les images en dataURL pour les inclure dans le PDF
-  const productImages = await Promise.all(products.map(p => loadImageAsDataURL(p.image)));
+  // Charger toutes les images en dataURL
+  const imagesDataURL = await Promise.all(products.map(p => loadImageAsDataURL(p.image)));
 
   const { jsPDF } = window.jspdf;
   const doc = new jsPDF({ unit: "mm", format: "a4", orientation: "portrait" });
 
-  const pageW  = doc.internal.pageSize.getWidth();   // 210 mm pour A4
-  const margin = 15;                                 // marges gauche/droite
-  const colW   = (pageW - 2 * margin) / 3;           // largeur de chaque colonne
-  const imgW   = colW - 8;                           // largeur de l'image (avec un peu de padding)
-  const imgH   = 35;                                 // hauteur de l'image (adaptée)
-  const rowH   = imgH + 28;                          // hauteur totale d'une ligne (image + texte)
-  const rowsPerPage = 5;                             // 5 lignes par page
-  const productsPerPage = rowsPerPage * 3;           // 15 produits par page
+  // Dimensions et marges
+  const pageW = doc.internal.pageSize.getWidth();   // 210 mm
+  const pageH = doc.internal.pageSize.getHeight();  // 297 mm
+  const margin = 15;
+  const usableW = pageW - 2 * margin;
+  const colW = usableW / 3;          // largeur d'une colonne (environ 60 mm)
+  const imgW = colW - 8;              // largeur image (56 mm)
+  const imgH = 35;                    // hauteur image (35 mm)
+  const rowH = 53;                    // hauteur totale d'une ligne (35 image + 18 texte)
+  const rowsPerPage = 5;              // 5 lignes par page
+  const productsPerPage = 15;         // 5 lignes * 3 colonnes
 
-  // --- Page de garde (identique à l'original, avec quelques ajustements) ---
+  // --- Fonction pour ajouter la page de garde (inchangée) ---
   function addCoverPage() {
     doc.setFillColor(193, 68, 14);
     doc.rect(0, 0, pageW, 70, "F");
@@ -709,64 +713,58 @@ async function downloadCatalogue() {
     doc.setFontSize(9);
     doc.setFont("helvetica", "normal");
     const intro = "Découvrez notre sélection de produits authentiques, issus des terroirs marocains, produits par les femmes artisanes de notre coopérative dans le respect des traditions ancestrales.";
-    const introLines = doc.splitTextToSize(intro, pageW - 2 * margin);
+    const introLines = doc.splitTextToSize(intro, usableW);
     doc.text(introLines, margin, 82);
   }
 
+  // --- Page de garde ---
   addCoverPage();
 
   // --- Génération des pages produits ---
-  let pageCount = 1;
+  let totalProducts = products.length;
   let currentPage = 1;
-  let yStart = 110; // point de départ après la page de garde (suffisamment bas)
+  let yStart = 110; // position de la première ligne après la page de garde
 
-  // Fonction pour ajouter une nouvelle page de produits (après la couverture)
-  function addNewProductPage() {
-    doc.addPage();
-    yStart = 20; // en haut de la page
-    currentPage++;
-  }
-
-  // Boucle sur tous les produits
-  for (let i = 0; i < products.length; i++) {
+  for (let i = 0; i < totalProducts; i++) {
     const product = products[i];
-    const imgDataURL = productImages[i];
+    const imgData = imagesDataURL[i];
 
-    // Déterminer la position dans la grille
-    const productIndex = i; // index global
-    const pageNumber = Math.floor(productIndex / productsPerPage); // page produit (0 = première page de produits)
-    const positionInPage = productIndex % productsPerPage;
-    const row = Math.floor(positionInPage / 3);      // ligne (0 à rowsPerPage-1)
-    const col = positionInPage % 3;                  // colonne (0,1,2)
+    // Déterminer la page (0 = première page de produits)
+    const pageIndex = Math.floor(i / productsPerPage);
+    const positionInPage = i % productsPerPage;
+    const row = Math.floor(positionInPage / 3);
+    const col = positionInPage % 3;
 
-    // Calculer la position Y pour cette page
-    let yPos = yStart + row * rowH;
-
-    // Si on dépasse la hauteur disponible, on passe à la page suivante
-    if (yPos + rowH > doc.internal.pageSize.getHeight() - margin) {
-      // On doit ajouter une nouvelle page avant ce produit
-      addNewProductPage();
-      // Recalculer la position pour cette même page (on recommence la grille)
-      const newProductIndex = i;
-      const newPageNumber = Math.floor(newProductIndex / productsPerPage);
-      const newPositionInPage = newProductIndex % productsPerPage;
-      const newRow = Math.floor(newPositionInPage / 3);
-      const newCol = newPositionInPage % 3;
-      yPos = yStart + newRow * rowH;
+    // Si on change de page (et que ce n'est pas la première)
+    if (pageIndex > 0 && positionInPage === 0) {
+      doc.addPage();
+      yStart = 20; // réinitialiser le y en haut
+      currentPage++;
     }
 
-    const xPos = margin + col * colW;
+    // Calculer yPos : départ = yStart + row * rowH
+    let yPos = yStart + row * rowH;
+
+    // Si la position dépasse la hauteur de page (sécurité)
+    if (yPos + rowH > pageH - margin) {
+      // On force un saut de page
+      doc.addPage();
+      yStart = 20;
+      yPos = yStart + row * rowH;
+    }
+
+    const xPos = margin + col * colW + 4; // centrage horizontal avec un petit padding
 
     // --- Ajouter l'image ---
     try {
-      doc.addImage(imgDataURL, "JPEG", xPos + 4, yPos, imgW, imgH, undefined, "FAST");
+      doc.addImage(imgData, "JPEG", xPos, yPos, imgW, imgH, undefined, "FAST");
     } catch (e) {
       // Fallback en cas d'erreur d'image
       doc.setFillColor(245, 237, 216);
-      doc.rect(xPos + 4, yPos, imgW, imgH, "F");
+      doc.rect(xPos, yPos, imgW, imgH, "F");
       doc.setTextColor(193, 68, 14);
       doc.setFontSize(8);
-      doc.text("Image non disponible", xPos + 4 + imgW/2, yPos + imgH/2, { align: "center" });
+      doc.text("Image non disponible", xPos + imgW/2, yPos + imgH/2, { align: "center" });
     }
 
     // --- Nom du produit ---
@@ -774,24 +772,24 @@ async function downloadCatalogue() {
     doc.setFontSize(9);
     doc.setFont("helvetica", "bold");
     const nameLines = doc.splitTextToSize(product.name, imgW);
-    doc.text(nameLines, xPos + 4, yPos + imgH + 3);
+    doc.text(nameLines, xPos, yPos + imgH + 3);
 
     // --- Prix ---
     doc.setTextColor(193, 68, 14);
     doc.setFontSize(10);
     doc.setFont("helvetica", "bold");
-    doc.text(`${product.price.toFixed(0)} DHS`, xPos + 4, yPos + imgH + 12);
+    doc.text(`${product.price.toFixed(0)} DHS`, xPos, yPos + imgH + 12);
 
     // --- Poids ---
     if (product.weight) {
       doc.setTextColor(90, 62, 40);
       doc.setFontSize(7);
       doc.setFont("helvetica", "normal");
-      doc.text(product.weight, xPos + 4, yPos + imgH + 18);
+      doc.text(product.weight, xPos, yPos + imgH + 18);
     }
   }
 
-  // --- Ajouter une page finale avec les informations de contact ---
+  // --- Page finale avec les infos de contact ---
   doc.addPage();
   const finalY = 70;
   doc.setFillColor(44, 85, 69);
@@ -805,17 +803,9 @@ async function downloadCatalogue() {
   doc.text(`wa.me/${WHATSAPP_NUMBER}`, pageW / 2, finalY + 14, { align: "center" });
   doc.text("Livraison gratuite dès 499 DHS • Produits 100% authentiques", pageW / 2, finalY + 20, { align: "center" });
 
+  // Sauvegarde du PDF
   doc.save("TIZWIT_Catalogue_Produits.pdf");
   showToast("Catalogue PDF téléchargé ! 📄", "success");
-}
-
-/** Wait for jsPDF to become available (loaded async by CDN) */
-function waitForjsPDF(attempts = 0) {
-  return new Promise((resolve, reject) => {
-    if (window.jspdf) return resolve();
-    if (attempts > 20) return reject(new Error("jsPDF non disponible"));
-    setTimeout(() => waitForjsPDF(attempts + 1).then(resolve).catch(reject), 200);
-  });
 }
 
 // ─────────────────────────────────────────────────────────────────
