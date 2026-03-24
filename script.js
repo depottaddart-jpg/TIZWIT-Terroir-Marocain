@@ -5,7 +5,7 @@
  * ─── CONFIGURATION ──────────────────────────────────────────────
  * Change WHATSAPP_NUMBER to your own number (international format, no +, no spaces)
  */
-const WHATSAPP_NUMBER = "212600000000";  // ← CHANGE THIS
+const WHATSAPP_NUMBER = "212633548605";  // ← CHANGE THIS
 
 /** Shipping thresholds */
 const SHIPPING_FREE_THRESHOLD = 499;    // DHS — free shipping above this
@@ -610,7 +610,7 @@ function initScrollReveal() {
 }
 
 // ─────────────────────────────────────────────────────────────────
-// PDF CATALOGUE (version corrigée)
+// PDF CATALOGUE (version corrigée avec gestion des images .webp)
 // ─────────────────────────────────────────────────────────────────
 function initCatalogueBtn() {
   document.getElementById("catalogue-btn")?.addEventListener("click", downloadCatalogue);
@@ -618,37 +618,55 @@ function initCatalogueBtn() {
 
 /**
  * Charge une image distante et retourne une dataURL.
- * Gère les erreurs CORS et renvoie un placeholder en cas d'échec.
+ * Gère les erreurs CORS et les formats .webp en utilisant un proxy CORS si nécessaire.
+ * En cas d'échec, retourne un placeholder.
  */
-function loadImageAsDataURL(url) {
-  return new Promise((resolve) => {
-    const img = new Image();
-    img.crossOrigin = "Anonymous";
-    img.onload = () => {
-      const canvas = document.createElement("canvas");
-      canvas.width = img.width;
-      canvas.height = img.height;
-      const ctx = canvas.getContext("2d");
-      ctx.drawImage(img, 0, 0);
-      const dataURL = canvas.toDataURL("image/jpeg", 0.85);
-      resolve(dataURL);
-    };
-    img.onerror = () => {
-      console.warn(`Impossible de charger l'image : ${url}`);
-      // Placeholder en dataURL (cercle gris avec texte)
-      const canvas = document.createElement("canvas");
-      canvas.width = 400;
-      canvas.height = 300;
-      const ctx = canvas.getContext("2d");
-      ctx.fillStyle = "#F5EDD8";
-      ctx.fillRect(0, 0, canvas.width, canvas.height);
-      ctx.fillStyle = "#C1440E";
-      ctx.font = "bold 20px sans-serif";
-      ctx.fillText("Image", canvas.width/2 - 40, canvas.height/2);
-      resolve(canvas.toDataURL("image/jpeg"));
-    };
-    img.src = url;
-  });
+async function loadImageAsDataURL(url) {
+  // Si l'URL est déjà un dataURL ou un placeholder, on la retourne directement
+  if (url.startsWith('data:') || url.startsWith('https://via.placeholder.com')) {
+    return url;
+  }
+
+  // Tentative de chargement direct
+  const tryLoad = (src) => {
+    return new Promise((resolve) => {
+      const img = new Image();
+      img.crossOrigin = "Anonymous";
+      img.onload = () => {
+        const canvas = document.createElement("canvas");
+        canvas.width = img.width;
+        canvas.height = img.height;
+        const ctx = canvas.getContext("2d");
+        ctx.drawImage(img, 0, 0);
+        resolve(canvas.toDataURL("image/jpeg", 0.85));
+      };
+      img.onerror = () => resolve(null);
+      img.src = src;
+    });
+  };
+
+  let dataURL = await tryLoad(url);
+  if (dataURL) return dataURL;
+
+  // Si échec direct, essayer avec un proxy CORS (ici un proxy public, mais vous pouvez utiliser le vôtre)
+  // Note : l'utilisation d'un proxy public peut être limitée; pour un usage en production, préférez un proxy local.
+  const proxyUrl = `https://cors-anywhere.herokuapp.com/${url}`;
+  dataURL = await tryLoad(proxyUrl);
+  if (dataURL) return dataURL;
+
+  // Dernier recours : générer un placeholder
+  console.warn(`Impossible de charger l'image : ${url}`);
+  const canvas = document.createElement("canvas");
+  canvas.width = 400;
+  canvas.height = 300;
+  const ctx = canvas.getContext("2d");
+  ctx.fillStyle = "#F5EDD8";
+  ctx.fillRect(0, 0, canvas.width, canvas.height);
+  ctx.fillStyle = "#C1440E";
+  ctx.font = "bold 20px sans-serif";
+  ctx.textAlign = "center";
+  ctx.fillText("Image", canvas.width/2, canvas.height/2);
+  return canvas.toDataURL("image/jpeg");
 }
 
 async function downloadCatalogue() {
@@ -670,7 +688,7 @@ async function downloadCatalogue() {
 
   showToast("Préparation des images… (peut prendre quelques secondes)", "");
 
-  // Charger toutes les images en dataURL
+  // Charger toutes les images en dataURL (avec gestion d'erreur)
   const imagesDataURL = await Promise.all(products.map(p => loadImageAsDataURL(p.image)));
 
   const { jsPDF } = window.jspdf;
@@ -722,7 +740,6 @@ async function downloadCatalogue() {
 
   // --- Génération des pages produits ---
   let totalProducts = products.length;
-  let currentPage = 1;
   let yStart = 110; // position de la première ligne après la page de garde
 
   for (let i = 0; i < totalProducts; i++) {
@@ -739,15 +756,13 @@ async function downloadCatalogue() {
     if (pageIndex > 0 && positionInPage === 0) {
       doc.addPage();
       yStart = 20; // réinitialiser le y en haut
-      currentPage++;
     }
 
     // Calculer yPos : départ = yStart + row * rowH
     let yPos = yStart + row * rowH;
 
-    // Si la position dépasse la hauteur de page (sécurité)
+    // Sécurité : si la position dépasse la hauteur, on force un saut de page (rare)
     if (yPos + rowH > pageH - margin) {
-      // On force un saut de page
       doc.addPage();
       yStart = 20;
       yPos = yStart + row * rowH;
@@ -767,7 +782,7 @@ async function downloadCatalogue() {
       doc.text("Image non disponible", xPos + imgW/2, yPos + imgH/2, { align: "center" });
     }
 
-    // --- Nom du produit ---
+    // --- Nom du produit (avec wrap automatique) ---
     doc.setTextColor(43, 27, 16);
     doc.setFontSize(9);
     doc.setFont("helvetica", "bold");
@@ -806,6 +821,15 @@ async function downloadCatalogue() {
   // Sauvegarde du PDF
   doc.save("TIZWIT_Catalogue_Produits.pdf");
   showToast("Catalogue PDF téléchargé ! 📄", "success");
+}
+
+/** Wait for jsPDF to become available (loaded async by CDN) */
+function waitForjsPDF(attempts = 0) {
+  return new Promise((resolve, reject) => {
+    if (window.jspdf) return resolve();
+    if (attempts > 20) return reject(new Error("jsPDF non disponible"));
+    setTimeout(() => waitForjsPDF(attempts + 1).then(resolve).catch(reject), 200);
+  });
 }
 
 // ─────────────────────────────────────────────────────────────────
