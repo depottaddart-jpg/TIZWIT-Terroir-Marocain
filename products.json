@@ -1,122 +1,632 @@
 [
   {
     "id": 1,
-    "name": "Amlou de l'Atlas",
-    "description": "Mélange traditionnel d'amandes grillées, d'huile d'argan pure et de miel sauvage. Préparé à la main selon les recettes ancestrales des femmes amazighes. Idéal avec du pain msemen au petit-déjeuner.",
-    "price": 85,
-    "image": "https://images.unsplash.com/photo-1601013407627-4e7f9e8c6c01?w=400&h=400&fit=crop&auto=format",
-    "category": "Pâtes & Tapenades",
-    "badge": "Coup de cœur",
-    "weight": "250g"
+    "name": "Huile d'argan alimentaire bio",
+    "description_fr": "Huile d'argan 100% bio, idéale pour l'assaisonnement et la cuisine. Riche en vitamine E et en acides gras essentiels.",
+    "description_ar": "زيت الأركان الغذائي العضوي 100%، مثالي للتتبيل والطهي. غني بفيتامين E والأحماض الدهنية الأساسية.",
+    "price": 120,
+    "image": "https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEhFtBJ4y5h9dtEXU4MfVZg8KL-qFvMotKpBtyK2CnPWxDtnxbmqgWibDzD7kFJWzJObwz7GKZLsbo0vyKb7RKP0NSv7vNO8kHBqAtsIMUTfkIy0B8hoSYCouJ9rzKWSpwUXY6noN6RGAeJLwOOCO-8KeowesB_ZKtimGCjcoGz9qfn2AhCMX4a4dMmGSp8/s947/huile-d-argan-alimentaire-bio.webp",
+    "category": "Huiles",
+    "weight": "250 ml"
   },
   {
     "id": 2,
-    "name": "Miel de Thym Sauvage",
-    "description": "Récolté dans les garrigues du Haut-Atlas à plus de 1800m d'altitude. Ce miel cru, non pasteurisé, offre des arômes intenses de thym sauvage et de fleurs de montagne. Riche en antioxydants.",
-    "price": 120,
-    "image": "https://images.unsplash.com/photo-1558642452-9d2a7deb7f62?w=400&h=400&fit=crop&auto=format",
-    "category": "Miels",
-    "badge": "Bio",
-    "weight": "500g"
+    "name": "Huile d'argan cosmétique bio",
+    "description_fr": "Huile d'argan biologique pour les soins de la peau et des cheveux. Nourrit, hydrate et protège.",
+    "description_ar": "زيت الأركان العضوي للعناية بالبشرة والشعر. يغذي ويرطب ويحمي.",
+    "price": 110,
+    "image": "https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEhoqOMhOsGl1a1oNFcR7EwOab-ed1co4H1ZCmEDlJ9JBNo_zklN1uBASf9xBK2NQoZXNB9FcaG4BlpJrpru7RrL9Yyq-NDjxqfzlNRolYwncWACXfdOwCnkF7d_0V_zBGZKp7ht4wFEhL-ZY82Is3kHcgYtsuboiQanOPb5LSAkLLBffVom-EP6N0oqBTo/s947/huile-d-argan-cosmetique-bio.webp",
+    "category": "Huiles",
+    "weight": "100 ml"
   },
   {
     "id": 3,
-    "name": "Huile d'Argan Cosmétique",
-    "description": "Première pression à froid, extraite des noix d'arganier par les femmes de la coopérative. Cette huile d'or liquide nourrit la peau et les cheveux en profondeur. Certifiée 100% pure.",
-    "price": 180,
-    "image": "https://images.unsplash.com/photo-1608248597279-f99d160bfcbc?w=400&h=400&fit=crop&auto=format",
+    "name": "Huile de coco bio",
+    "description_fr": "Huile de coco vierge, extraite à froid. Parfaite pour la cuisine et les soins corporels.",
+    "description_ar": "زيت جوز الهند البكر، معصور على البارد. مثالي للطهي والعناية بالجسم.",
+    "price": 85,
+    "image": "https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEiBctPqwKMeh2AeEVTv5JIAm0EJEcpvKfsF425ckV8U_YgW4AZUWXgi5auIIWTCAcGpME-uOZMPxeEL5vVrOyyVhn9HXDRr0a0YYuWkuUzKdDVQFZJkCALQCifTc_UfeU9wrSpDUbxtOV9ohQmOwCooJPSIsvDB8XF0KDbWTgUKs9oi4E017v6AF05wQg4/s1000/Huile-de-coco-bio-GPH-diffusion-500-ml-aliment-bio-Maroc-avant.webp",
     "category": "Huiles",
-    "badge": "Premium",
-    "weight": "100ml"
+    "weight": "500 ml"
   },
   {
     "id": 4,
-    "name": "Huile d'Olive Vierge Extra",
-    "description": "Pressée à froid dans notre moulin traditionnel de Meknès. Variété Picholine marocaine aux reflets dorés, avec des notes de pomme verte et d'artichaut. Acidité inférieure à 0,5%.",
-    "price": 95,
-    "image": "https://images.unsplash.com/photo-1474979266404-7eaacbcd87c5?w=400&h=400&fit=crop&auto=format",
+    "name": "Huile de graines de figues de barbarie bio",
+    "description_fr": "Huile précieuse aux propriétés anti-âge, riche en vitamines et antioxydants.",
+    "description_ar": "زيت ثمين بخصائص مضادة للشيخوخة، غني بالفيتامينات ومضادات الأكسدة.",
+    "price": 250,
+    "image": "https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEjyIaKTZaHEXuUPvShZ29wb8YF7hkkhNkGq7Lur9BG4p7Vxbr7fxLwZuzXNG5MTACeb-94sc6D0gSMX3KiGi9lAwxgEdAKWFIZ9cxaGK9EcW4CM-nN2Xbh-8lpYkc7qfCXw-ALbiV1OyX9mJ2T5h_LH7iZFSJLhGQB3rCcShV0j6WbJDF3t-ETHvDYEqGk/s947/huile-de-graines-de-figues-de-barbarie-bio.webp",
     "category": "Huiles",
-    "badge": null,
-    "weight": "500ml"
+    "weight": "50 ml"
   },
   {
     "id": 5,
-    "name": "Safran de Taliouine",
-    "description": "L'or rouge du Maroc, cultivé dans la vallée de Taliouine, capitale mondiale du safran. Filaments entiers de qualité Category I. Arôme puissant, couleur intense. Récolte manuelle.",
-    "price": 220,
-    "image": "https://images.unsplash.com/photo-1596040033229-a9821ebd058d?w=400&h=400&fit=crop&auto=format",
-    "category": "Épices",
-    "badge": "Rare",
-    "weight": "2g"
+    "name": "Huile d'olive extra vierge",
+    "description_fr": "Huile d'olive extra vierge, première pression à froid. Idéale pour assaisonner et cuisiner.",
+    "description_ar": "زيت زيتون بكر ممتاز، عصرة أولى على البارد. مثالي للتتبيل والطهي.",
+    "price": 70,
+    "image": "https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEhl2aMSHSw8iCkhKy0pcswDkbCx3YJHouhEEu8Rdu-vC-3h2SjT_vvViF_6Uwnd5_hNB4UX1huh5Z9gkE1QWkDwzd3nUQmONG6puoaod4Z7ifUpQ6AlWNO_1PQxUzJh1rLy0q4hmxhH2Njqv01y8HiwPLHmGsKPSQU_xppENW3PFEUlX5x594QCobN9z24/s947/huile-d-olive-extra-vierge.webp",
+    "category": "Huiles",
+    "weight": "1 L"
   },
   {
     "id": 6,
-    "name": "Ras El Hanout Maison",
-    "description": "Notre mélange secret de 27 épices torréfiées et moulues à la main : curcuma, gingembre, cannelle, coriandre, cardamome et bien d'autres. La signature olfactive de la cuisine marocaine authentique.",
-    "price": 65,
-    "image": "https://images.unsplash.com/photo-1544025162-d76594e8cef1?w=400&h=400&fit=crop&auto=format",
-    "category": "Épices",
-    "badge": null,
-    "weight": "150g"
+    "name": "Marjolaine",
+    "description_fr": "Marjolaine séchée, idéale pour les tisanes et la cuisine. Arôme doux et digestif.",
+    "description_ar": "بردقوش مجفف، مثالي للشاي والطهي. نكهة لطيفة ومفيد للهضم.",
+    "price": 35,
+    "image": "https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEijy79AMZD4NBsIxkZG_gMlBHpHW1j1vKcxHbrPtgk_h10qVzwtngfYuQ1jYDxOqQQ0XlALw7FO8neetC8uAgti-OebUwyoCrzIfAxRXZLgLf9oCHhxleJNMC7F9RVBz_0qAgJab12xaoi-N9aM-EULGXfLYpayWMuLJBnFl-tKvLZQLg82RX43s10yv_U/s947/marjolaine.webp",
+    "category": "Tisanes",
+    "weight": "100 g"
   },
   {
     "id": 7,
-    "name": "Huile d'Argan Culinaire",
-    "description": "Extraite d'amandes d'argan légèrement grillées, cette huile dégage un arôme de noisette unique. Filet sur couscous, salades ou tajines. Conditionnée en bouteille artisanale en verre soufflé.",
-    "price": 145,
-    "image": "https://images.unsplash.com/photo-1589820296156-2454bb8a6ad1?w=400&h=400&fit=crop&auto=format",
-    "category": "Huiles",
-    "badge": "Artisanal",
-    "weight": "250ml"
+    "name": "Mélisse citronnelle",
+    "description_fr": "Tisane relaxante au parfum citronné. Favorise le sommeil et la digestion.",
+    "description_ar": "شاي مهدئ برائحة الليمون. يساعد على النوم والهضم.",
+    "price": 40,
+    "image": "https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEiB4d6z8OA7h3vfU8GMhTLO0wOUuGv2lZJI2cNxWvGsDSe5AA8aoylCjWNIPb3AHHTjAFHuw7G-EJckn_4v8v5ZyetwL0dKzfB2Uv2s2qBxxJ4FXUM2288DQuUlfpBbuJqhuu9Qq2aiNYgF_EZyDCPDCn-lpUfIjKvZ_2PKcu6HsvRxfd9jIzJOGvJP8ws/s947/melisse-citronnelle.webp",
+    "category": "Tisanes",
+    "weight": "100 g"
   },
   {
     "id": 8,
-    "name": "Miel de Jujubier (Sidr)",
-    "description": "Exceptionnel miel monofloral issu des fleurs de jujubier du Sud marocain. Texture crémeuse, couleur ambrée foncée, douceur enveloppante. Très prisé pour ses vertus thérapeutiques traditionnelles.",
-    "price": 195,
-    "image": "https://images.unsplash.com/photo-1587049352846-4a222e784d38?w=400&h=400&fit=crop&auto=format",
-    "category": "Miels",
-    "badge": "Premium",
-    "weight": "500g"
+    "name": "Menthe pouliot",
+    "description_fr": "Menthe pouliot séchée, aux vertus digestives et antispasmodiques. Arôme frais et puissant.",
+    "description_ar": "نعناع فليو مجفف، له فوائد هضمية ومضاد للتشنجات. نكهة منعشة وقوية.",
+    "price": 35,
+    "image": "https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEjphnPde0mVhKu-LLnKd9jC66KjcSgydl3k7DSHjncY87ozxtolcsKuhXa5_VtHYnitgBJJgz_yUiGCTpID74-CchrmiSDnPhxuXyrFnPcPjNoIfHmJO6VMIbYZn4dcDjmuQqLjCQUlIVljNJCJjLGAv3IbL2Fcs-jKxfUkqtuzxkIv9qy8-Xiho0pvenU/s947/menthe-pouliot.webp",
+    "category": "Tisanes",
+    "weight": "100 g"
   },
   {
     "id": 9,
-    "name": "Cumin de Marrakech",
-    "description": "Cumin entier cultivé dans la plaine du Haouz, séché naturellement au soleil du désert. Grain de taille uniforme, huiles essentielles préservées. Base incontournable de la cuisine marocaine.",
-    "price": 35,
-    "image": "https://images.unsplash.com/photo-1599940824399-b87987ceb72a?w=400&h=400&fit=crop&auto=format",
-    "category": "Épices",
-    "badge": null,
-    "weight": "200g"
+    "name": "Menthe séchée",
+    "description_fr": "Menthe verte séchée, parfaite pour le thé à la menthe marocain. Saveur authentique.",
+    "description_ar": "نعناع مجفف، مثالي للشاي المغربي بالنعناع. نكهة أصيلة.",
+    "price": 30,
+    "image": "https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEi8tWBClvjtgOgoCCg5xFMHJSGnSZa-wDO9IBR6mqTjiddMQ4MId2x-dXtIn8mjGgyxK99WZ7QSg0onFyPlkPFvp0moup0P46Qb84LiQmSm5MQdnNI_2QNKr26bFnNO9kZcnNbAU1NWoXZQdkFpRFrFOTKTBOCsjyFuSFUYDwvc5k5iLQ68uIoRyglP1G8/s947/menthe-sechee.webp",
+    "category": "Tisanes",
+    "weight": "100 g"
   },
   {
     "id": 10,
-    "name": "Coffret Découverte Terroir",
-    "description": "Notre sélection prestige : 1 pot d'amlou, 1 miel de thym (250g), 1 flacon d'huile d'argan culinaire (100ml) et un sachet de safran (1g). Présenté dans un coffret en bois d'olivier gravé.",
-    "price": 350,
-    "image": "https://images.unsplash.com/photo-1513475382585-d06e58bcb0e0?w=400&h=400&fit=crop&auto=format",
-    "category": "Coffrets Cadeaux",
-    "badge": "Bestseller",
-    "weight": "Coffret"
+    "name": "Sauge",
+    "description_fr": "Sauge officinale séchée, reconnue pour ses bienfaits sur la digestion et la gorge.",
+    "description_ar": "الميرمية المجففة، معروفة بفوائدها للهضم والحلق.",
+    "price": 40,
+    "image": "https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEi-L_srCCr3vA-lNdZztJT3WOnIkV6pm6pDRYGuvzOkj-QPgn0Yml3fWikZ0QC5AGmL0YZAHmytlXkJEPMgeMkHwRNAj0adaId88VIuzZfTLhUd-eap9N1NUAruOyR0B9SLOR92W-cakHC8ZJ9IJ2drOpOLn3PXZHNQCDnHSbFaZ85K5AAVlQFUh6pnYl8/s947/sauge.webp",
+    "category": "Tisanes",
+    "weight": "100 g"
   },
   {
     "id": 11,
-    "name": "Rose du Dadès Séchée",
-    "description": "Pétales de roses Damask cueillis à l'aube dans la vallée des Roses, séchés à l'ombre pour préserver leurs arômes. Usage culinaire (couscous, pâtisseries) ou décoratif. Parfum enivrant.",
+    "name": "Tisane du Moyen Atlas",
+    "description_fr": "Mélange traditionnel de plantes du Moyen Atlas, aux notes florales et apaisantes.",
+    "description_ar": "مزيج تقليدي من أعشاب الأطلس المتوسط، بنكهات زهرية مهدئة.",
     "price": 45,
-    "image": "https://images.unsplash.com/photo-1548248823-ce16a73b6d49?w=400&h=400&fit=crop&auto=format",
-    "category": "Épices",
-    "badge": null,
-    "weight": "50g"
+    "image": "https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEgF_Mq69_SdUQ5zltNO9Hsv-RRVPbQ_7rvMiRSA9b3X_QmHPcVi9iSSUXtemm4zo774B8CZnu_4a_CcTlIscG95TAgZQp1YJ87jSxGrqH75NtFb4wuuCrFlupaH65II_7xd1X_DBxNJZ9-yqJ9yPcBKox9yyhAGebOfNlMhgNUCuFA9mzCeMIH_9EeAPNY/s947/tisane-du-moyen-atlas.webp",
+    "category": "Tisanes",
+    "weight": "100 g"
   },
   {
     "id": 12,
-    "name": "Ghee au Beurre de Brebis",
-    "description": "Smen artisanal clarifié, préparé selon la tradition des nomades du Moyen-Atlas. Affiné plusieurs mois en jarre de terre, il confère une saveur incomparable aux tajines et sauces cuisinées.",
-    "price": 110,
-    "image": "https://images.unsplash.com/photo-1505252585461-04db1eb84625?w=400&h=400&fit=crop&auto=format",
-    "category": "Pâtes & Tapenades",
-    "badge": "Traditionnel",
-    "weight": "300g"
+    "name": "Tisane marocaine",
+    "description_fr": "Mélange typique marocain pour une boisson chaude réconfortante et parfumée.",
+    "description_ar": "خلطة مغربية تقليدية لمشروب دافئ مريح وعطري.",
+    "price": 40,
+    "image": "https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEj-c-4k10b0efasmybnV3rZWfL2IT1eT7aYtr0AbPgUF33qycYMFfWnQ2QjDx5ufvH7_3lghIE2imvIFXwI-mbcebY-F3iIgGe6UQC4nv6Xj9X02yVbD_IhVVfSGCXigQQMJnd6j25Wqe-z6vrnIA4HB6l7ItJSDzgNCXgHJhtWLYrIBYImtCWnpfp2cGU/s947/tisane-marocaine.webp",
+    "category": "Tisanes",
+    "weight": "100 g"
+  },
+  {
+    "id": 13,
+    "name": "Tisane marrakchia",
+    "description_fr": "Tisane aux épices douces inspirée de la tradition de Marrakech.",
+    "description_ar": "شاي بالتوابل الخفيفة مستوحى من تقاليد مراكش.",
+    "price": 45,
+    "image": "https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEjPwbBIvE2AN976HRWCwe8HC_7W4btFzIoFfl21Uq9PJtj2gpIPTeLhUvuLDgHNK_ASX7DkV0lV1cCbXICFyC-DJ89Z_4JJCK0qfZn3ZWTACLZgHaqMX-qMkhBEOqPztZ7sPf35vw32QHFo2p-69J-8mGk9fOSMBhwwLktkEGlQApKi4hE43UiWEhY_7Vk/s947/tisane-marrakchia.webp",
+    "category": "Tisanes",
+    "weight": "100 g"
+  },
+  {
+    "id": 14,
+    "name": "Tisane relaxante",
+    "description_fr": "Mélange de plantes calmantes (verveine, camomille, tilleul) pour se détendre.",
+    "description_ar": "مزيج من الأعشاب المهدئة (الزيزفون، البابونج، اللويزة) للاسترخاء.",
+    "price": 45,
+    "image": "https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEhZ9JRJuDV2cL_nJ4tS1Ym2w7paUqIiNCVAbrdaBUK17mCabZMIA3o7C0VGqsPIO8c9OVPpmgkIibMHLT4lBnL_psV-6Jo4XHhct6AxzvDP06Oywl6O1oETxyrkUv6i0q2GuMKB3uEFP5Qs-yjwb6iWK1J-naX-kM3gQWW5pU6ni8IM9W_dH34ht82Fb-8/s947/tisane-relaxante.webp",
+    "category": "Tisanes",
+    "weight": "100 g"
+  },
+  {
+    "id": 15,
+    "name": "Miel au gingembre",
+    "description_fr": "Miel naturel infusé au gingembre. Idéal pour la gorge et les boissons chaudes.",
+    "description_ar": "عسل طبيعي منقوع بالزنجبيل. مثالي للحلق والمشروبات الساخنة.",
+    "price": 80,
+    "image": "https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEjWJ3gKwjHPTg3qBUDNbewFY4uhOwB2nLiFt6qV-qju-yXR9jEq8erFR3qppARKNmdq0ncOGlFnVcO5SwIUynRPfXGdbbvA07_miBCvO_wc2eLPZdeCWN8SW4gwh7I-Yx4MEjo10bGQXIyYX7PbEGp7f2KXs7NHlFUIzhHPKUYnI8zMZ1x_PcYGSgbkXxQ/s947/miel-au-gingembre.webp",
+    "category": "Miels",
+    "weight": "500 g"
+  },
+  {
+    "id": 16,
+    "name": "Miel de caroubier",
+    "description_fr": "Miel de caroubier, au goût de caramel et aux vertus tonifiantes.",
+    "description_ar": "عسل الخروب، بنكهة الكراميل وخصائص منشطة.",
+    "price": 90,
+    "image": "https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEhYMk-MkV8OjGxXFDf3iAsUQRgV9E0Vt9QHotiby4DdFhBxAU290itRTsh-2-0c_WOH3ac_zl57kQZsrfO15XWDFS0OdRf98qwFCGdmf-qKGGDtUKK4sBgW7SIAo-2db1V-IIuqVIYV5FVaXZmLyR7ZthR3sBXZ3iuOn-AFSx-ZF9cbrhlt260OeXeS2GQ/s947/miel-de-caroubier.webp",
+    "category": "Miels",
+    "weight": "500 g"
+  },
+  {
+    "id": 17,
+    "name": "Miel de chardon",
+    "description_fr": "Miel de chardon, clair et délicat, reconnu pour ses bienfaits sur le foie.",
+    "description_ar": "عسل الشوك، فاتح وخفيف، معروف بفوائده للكبد.",
+    "price": 85,
+    "image": "https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEgFjxYSDo7cp51QOpMzZpvhNJ3GcJ6_hCfIbIQRissDbk5UCcikoXPRX-Xs8adj0kfr63HqTsq1W9_pIsgvTnDcg_QTo_8i7CRZCmcsF5uVR20sdg6ShbXSNYO4QW3yXLJJFZmZoP9Rr6SBYi6fLkasheVI2hhXDU3rJa3jPD0jqN-iSNE32d61WWhKJoA/s947/miel-de-chardon.webp",
+    "category": "Miels",
+    "weight": "500 g"
+  },
+  {
+    "id": 18,
+    "name": "Miel de jujubier",
+    "description_fr": "Miel de jujubier, aux arômes de bois et de réglisse, très prisé au Maroc.",
+    "description_ar": "عسل السدر، برائحة الخشب وعرق السوس، ذو قيمة كبيرة في المغرب.",
+    "price": 120,
+    "image": "https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEjrBLam8Oh7w-pomJE0D4Gn_EmhiTPRWAn_NYLrt5rJ_cRAmWLE8ebLQu5ITGEAG02y8ZA8jWAzmqolBLz_QVTvlJdG4J62FpVzJ71tOJJ41nn8H-crpfsADFtq5zXoDIJV08HLtFr1W4VOtdtqJL51Lwm2rGC7giEfoYdNZwaMPhazjz0A-wRlyk8M7bs/s947/miel-de-jujubier.webp",
+    "category": "Miels",
+    "weight": "500 g"
+  },
+  {
+    "id": 19,
+    "name": "Miel de lavande",
+    "description_fr": "Miel de lavande, floral et parfumé, parfait pour les infusions et les desserts.",
+    "description_ar": "عسل اللافندر، زهري وعطري، مثالي للمشروبات الساخنة والحلويات.",
+    "price": 85,
+    "image": "https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEjczM51rc7pfEmTB5VRibatyRioDnvceiKwj_fmfBn9eDSwYWco-85zbwyanQHR7J4_qXS8ppYn3RBQIavfXK4H6p9VDxaA76f1YngoVpItPcxZ2hXZRgAWxTLqsd1-yhDfNEJ5n17nHcZUn7zQ72avjwXG1t3-VYiGDNycogz3q6t1oLjngn3P9S_I0m0/s947/miel-de-lavande.webp",
+    "category": "Miels",
+    "weight": "500 g"
+  },
+  {
+    "id": 20,
+    "name": "Miel de thym",
+    "description_fr": "Miel de thym, corsé et aromatique, excellent pour la gorge et l'immunité.",
+    "description_ar": "عسل الزعتر، قوي وعطري، ممتاز للحلق والمناعة.",
+    "price": 90,
+    "image": "https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEhu52du4KM4-FXvr9VowcrjXZX4SG5NZc1UtrcmzHgqerOwJoPRGgPwiMPLQsDy1hQMfDgm7A7JqO_h6FALD6ZgAPAwKy3HcvqtwWHpd2-tns9QME38TMRZV-FyfSjc5ZTTG1IWqkt4IYJjQX_IJ8NUQQHgS7anndjGRN7dhBuIIt6DGgUdH69gQXJtiRM/s947/miel-de-thym.webp",
+    "category": "Miels",
+    "weight": "500 g"
+  },
+  {
+    "id": 21,
+    "name": "Miel d'eucalyptus",
+    "description_fr": "Miel d'eucalyptus, au goût frais et balsamique, parfait pour les affections respiratoires.",
+    "description_ar": "عسل الأوكالبتوس، بنكهة منعشة وبلسمية، مثالي لمشاكل الجهاز التنفسي.",
+    "price": 85,
+    "image": "https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEgqbP_hvd95jmpDcgJi40s73kPHf8yK3ZmmxOJ1IgWWr-iVRJXNsJdUG_iArbjvwfRoHgMDEnEH6A6SqHIlauSCcwdE_Qmyp6lC54vOYWiT7T7qwlN4zRsttHqa5Aur9Bx2DSjZrVopvdCx9rVYdR1XSjWm90MnhOydaxXhuHrl6_brTJfJH53-Td4fQOE/s947/miel-d-eucalyptus.webp",
+    "category": "Miels",
+    "weight": "500 g"
+  },
+  {
+    "id": 22,
+    "name": "Miel d'euphorbe",
+    "description_fr": "Miel d'euphorbe, rare et puissant, aux propriétés revitalisantes.",
+    "description_ar": "عسل الفربيون، نادر وقوي، بخصائص منشطة.",
+    "price": 100,
+    "image": "https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEh5vgJVxDA0jsZk3WXTeEvy_fNOlioN0kkH_AQ2fLwlrdLi8YOtjGOUWJUtvl3bW5Sbu0FjPUgXVIx4tDBzw4UntbvIuTl2K-WudoF1f8Go8AKovuvBdeyzgwTvhBmv2QvkEIhks791zIqmxzJwKD6jf5QUsok9GGv7YBD1LdWV_Q5idvPVWI5XnGIXUmg/s947/miel-d-euphorbe.webp",
+    "category": "Miels",
+    "weight": "500 g"
+  },
+  {
+    "id": 23,
+    "name": "Miel d'herbes de Souss",
+    "description_fr": "Miel de plantes sauvages du Souss, aux arômes complexes et variés.",
+    "description_ar": "عسل أعشاب سوس، بنكهات معقدة ومتنوعة.",
+    "price": 95,
+    "image": "https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEi3rTE6htyuPA4UEf1q56ePiOB_-Hibo7zQvzsiZbsOppRBHeHaUKPY9It5eZFTbCnVjEqfdl0f7XWT3f2LI1MneKsYw9lVJzn5drgeTw0HZXVjpyoEcf2kRUc7fZ7m-oNEyaLwtqDmRHxdmfl7L4dCjbmRnXTkwbLMVZJFOqDAY79d2JvpWgiLtGUHFYg/s947/miel-d-herbes-de-souss.webp",
+    "category": "Miels",
+    "weight": "500 g"
+  },
+  {
+    "id": 24,
+    "name": "Miel d'oranger",
+    "description_fr": "Miel d'oranger, délicatement parfumé aux fleurs d'oranger. Idéal pour adoucir.",
+    "description_ar": "عسل زهر البرتقال، برائحة زهر البرتقال الرقيقة. مثالي للتحلية.",
+    "price": 90,
+    "image": "https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEi5G8a1rtpz4vt6mYwp2UGHjkHKcQh_gdlJ9FBuUtPyRbO5LOwO6nEtpiP13QU-7_apxODn5zeiYTo2sqz4iFOM3gjP-T9LXI-G0mwkVkwIZHxxU5HW9WU-t16DCU_JWp-mtp7KDY7xblbuEnDvbirzzZ539H8yp3qzfEMrvGJFWdLhEnGGQyEVdaI62-g/s947/miel-d-oranger.webp",
+    "category": "Miels",
+    "weight": "500 g"
+  },
+  {
+    "id": 25,
+    "name": "Miel d'origan",
+    "description_fr": "Miel d'origan, au caractère épicé et aux bienfaits antibactériens.",
+    "description_ar": "عسل الأوريجانو، ذو طابع حار وفوائد مضادة للبكتيريا.",
+    "price": 85,
+    "image": "https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEg2aEnXU3J0B89z1U4GXVbiq9fz6PtQedZjiCOWUba4hig_QEF6Z3GzSQaCLQ5VYK31_CrkhUs9vbV3owWgHTxoz-2O7p4GzwjgbqIf97ueEe6noJCoOVyWWyeCF9OEFQc6fHDNKrZObVi1Gbfti6djY3PWeopazm_tPmPzfSUapFMWzQhkRRbtL4eKMQQ/s947/miel-d-origan.webp",
+    "category": "Miels",
+    "weight": "500 g"
+  },
+  {
+    "id": 26,
+    "name": "Miel multifleurs",
+    "description_fr": "Miel de fleurs variées, doux et équilibré, parfait pour tous les usages.",
+    "description_ar": "عسل متعدد الأزهار، حلو ومتوازن، مثالي لجميع الاستخدامات.",
+    "price": 70,
+    "image": "https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEgAwmyoqi9ryUHEv4bDeyWnFSw4fQasWqjjxlRHZVoA2YYVW9RULBEUnpuheiW-iI8-OXtqdPA75xNtyXLuRzIiZ8MBxckRKuBsfrhijRc8JmdCRXXm3x3a9-5mIe4dmQRWlFaR99e9rrwhqkzUtbmoWoMTJaB6drLwuGM2P2wr_rSupkVF1qQIMS2h8dQ/s947/miel-multifleurs.webp",
+    "category": "Miels",
+    "weight": "500 g"
+  },
+  {
+    "id": 27,
+    "name": "Miel propolis",
+    "description_fr": "Miel enrichi à la propolis, pour renforcer les défenses naturelles.",
+    "description_ar": "عسل مدعم بالبروبوليس، لتقوية المناعة الطبيعية.",
+    "price": 95,
+    "image": "https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEjpqE5DOQNeZy8N4_treTG5_uUU76tN7FuxLsF_98328qO3IbENg5JDmhXw3-J8jXF5eRIQhr31kPB1xEaiwL0h5rrkDmcPphyphenhyphenl0JQnFEDVqsL_DN_mgyVvqENTjugV-3oLlutHObEVUa0_MYICC0dYqExPzXdIjGu1cQyvF5oWjaibCJUluCqYngtGBwE/s947/miel-propolis.webp",
+    "category": "Miels",
+    "weight": "500 g"
+  },
+  {
+    "id": 28,
+    "name": "Pollen",
+    "description_fr": "Pollen frais, riche en protéines et vitamines. Idéal en complément alimentaire.",
+    "description_ar": "حبوب اللقاح الطازجة، غنية بالبروتينات والفيتامينات. مثالية كمكمل غذائي.",
+    "price": 120,
+    "image": "https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEhXAtgD-5svwcMOgGY_ZGoAUVfMoZBgtzDPeXT-GRjBl9_kia5uCE6l99NX9qA6PxYfZWfiYh13_qLaQTLIcq3YwTmlwmTnM-NXMw7KRK0rIdySPDLpiyEmnxPor_PYRZs9WbEfnKSxD7bgxdpXSJIvR_8VDy9EAdJQvR_wjeDnamgVmwXcLgRnXVmOBGg/s947/pollen.webp",
+    "category": "Miels",
+    "weight": "250 g"
+  },
+  {
+    "id": 29,
+    "name": "Trésor de la ruche",
+    "description_fr": "Mélange de miel, gelée royale, pollen et propolis. Un concentré de bienfaits.",
+    "description_ar": "مزيج من العسل، الغذاء الملكي، حبوب اللقاح والبروبوليس. تركيز من الفوائد.",
+    "price": 150,
+    "image": "https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEjbWRhIsTOgp4DEdC0JA0PE1Sl4DWdcP2LyQk3Rcu-RX-feCzRJ5BOy8CJWOAOMZ4jSVKx_Faz4MVR-P43luQAMRUReTBGm8278-vmlFNaaIbD7j8JqiUYSU1_AKawH8m6S8WjbUYp35Jc-bFG3pTfu18qqW6Rg_C5QTqG5ON05oIiSu3JNJXx1x8wJe4U/s947/tresor-de-la-ruche.webp",
+    "category": "Miels",
+    "weight": "500 g"
+  },
+  {
+    "id": 30,
+    "name": "Graines d'anis",
+    "description_fr": "Graines d'anis vert, parfumées et digestives. Utilisées en tisane ou en pâtisserie.",
+    "description_ar": "بذور اليانسون الأخضر، عطرية ومفيدة للهضم. تستخدم في الشاي أو الحلويات.",
+    "price": 25,
+    "image": "https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEgKaYDNk61kWsuDq7KsrVarGdaH4ydwLIaEf7SJNoVl8hLHgCSoCkE0VwkAZXFB7zNWaQr6ro4d6pjgsku59zUg8mpDopFgNgx_EpyUANpuAhD-J1Iu2dFuFPCrdtm7QfldXnsx2nPh9yxT8eAIBbuRVIqe4ilQ7G9QMewyFhZimRfUsK4WyzdMN_A6m_0/s947/graines-d-anis.webp",
+    "category": "Graines",
+    "weight": "200 g"
+  },
+  {
+    "id": 31,
+    "name": "Graines de carvi",
+    "description_fr": "Graines de carvi, au goût anisé et légèrement poivré. Idéales pour pains et digestifs.",
+    "description_ar": "بذور الكراوية، بنكهة يانسون و فلفل خفيف. مثالية للخبز والهضم.",
+    "price": 25,
+    "image": "https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEgnUDRWfe6wrvo65MJpwHWrtyJFW3bPTLkCquNmHrHwDv3GfjLceRznG-7hEh_Rjr2oSOUkvpCGkJNm9iaAJydp05ouG6TjK9MbCPIWeiEbH6qqrOie3GPOSVW3iGiscXYR4zz2SG-oxpDBLXdAuzHOeCQ0nnRu9BfYyGtPNandSaYHCW2lNIuU64UR29U/s947/graines-de-carvi.webp",
+    "category": "Graines",
+    "weight": "200 g"
+  },
+  {
+    "id": 32,
+    "name": "Graines de chia",
+    "description_fr": "Graines de chia, riches en oméga-3 et fibres. Parfaites pour les smoothies et yaourts.",
+    "description_ar": "بذور الشيا، غنية بالأوميغا 3 والألياف. مثالية للعصائر والزبادي.",
+    "price": 60,
+    "image": "https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEjkviFEPLXcsYMPFm0BSl7GMJX_kRPY1eIZMnnx92nOdncu_mOlLFHrg9zTPfXYm6G9FMkJ3Hg8RmmvpdTvMxUYIxHGiKOu51-evJ984UX3d5T5f3S-CUmpKuIH55RSnPFXunhkqCDfarpamqh-aFmRnNApp8e1A6zo-5CWs3AA8V1tFFpx67YJ4_IQktc/s947/graines-de-chia.webp",
+    "category": "Graines",
+    "weight": "250 g"
+  },
+  {
+    "id": 33,
+    "name": "Graines de cresson",
+    "description_fr": "Graines de cresson, utilisées pour leurs vertus stimulantes et en cuisine.",
+    "description_ar": "بذور الجرجير، تستخدم لخصائصها المنشطة وفي الطبخ.",
+    "price": 30,
+    "image": "https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEhNoPgAM46gbLxJpvEcjphhJU_KpZTwB1btrWm4j1YQ3YD7aZr-g0WzdKX9CGcy8DvcjdkbS4p2nZDjXqf_ynsQGvI_rJK5IepcE9de1fkbcEq09ZeoSoU-mE5GubSjKYEe_5dVx9UqGaPTBwfV15utAEpnshgftKOOZaxLnlFWTIVQMWT2IXlzSYwv2wk/s947/graines-de-cresson.webp",
+    "category": "Graines",
+    "weight": "200 g"
+  },
+  {
+    "id": 34,
+    "name": "Graines de fenouil",
+    "description_fr": "Graines de fenouil, au goût anisé doux. Excellentes pour la digestion.",
+    "description_ar": "بذور الشمر، بنكهة يانسون خفيفة. ممتازة للهضم.",
+    "price": 25,
+    "image": "https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEhv-cSQ0byWxzvz9wc3hnl1RE1Q8Qv_8kzibTB3us9XU45UgxSSZzKAjayvUt6UshIJnD8XyHxduPRYvqnGJslJpxxNJERb8N_LGdTk1gknYtA3HtdC7h05wbybwZuaaBybe-wQlInYxeQwxlEvFzvwsJgvpqJJqvk4Ncc83CvJU8yWZXJa66u4XRfT11k/s947/graines-de-fenouil.webp",
+    "category": "Graines",
+    "weight": "200 g"
+  },
+  {
+    "id": 35,
+    "name": "Graines de lin",
+    "description_fr": "Graines de lin brun, riches en fibres et en oméga-3. À utiliser en poudre ou entières.",
+    "description_ar": "بذور الكتان البني، غنية بالألياف والأوميغا 3. تستخدم مطحونة أو كاملة.",
+    "price": 30,
+    "image": "https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEi6J2zidGQr5UFnsJBAjEWnxTZH-ClWHbbpa0s5h6L3izm1AR0KucIpMBgTtsujBmVQGUwUmoWwpR1krExDYt0Sx-zBZE-3ExddLgAcLIl-lW7fcO4yiMp1sQg1v6S17dGi2Hpt1zbw6zpilakU4VHNfd7DcvqB0Bz9VxUoE1oMtt8PFYdK18NxYaqIQfY/s947/graines-de-lin.webp",
+    "category": "Graines",
+    "weight": "250 g"
+  },
+  {
+    "id": 36,
+    "name": "Graines de sésame",
+    "description_fr": "Graines de sésame dorées, idéales pour la pâtisserie et les salades.",
+    "description_ar": "بذور السمسم الذهبية، مثالية للحلويات والسلطات.",
+    "price": 35,
+    "image": "https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEiy83Ylo4XuqbTgwL2wNe3xUObjf_AIkURZ8sVed4-iscR35WnNjOktdjD5hgPWyhoTFpt7rylMpUPX9w3RIAvtGgJ2IN7m5yuNUcLW_a9y5p2SLSj2B5j6wfikIpvN8kiTGy-fsOJEdp6OMUB_xyKy__n7XNEWHjAWWpulqfrxf152b_Lw3M1IPsm-Ots/s947/graines-de-sesame.webp",
+    "category": "Graines",
+    "weight": "200 g"
+  },
+  {
+    "id": 37,
+    "name": "Mix graines",
+    "description_fr": "Mélange de graines (tournesol, courge, sésame) pour un apport nutritif complet.",
+    "description_ar": "مزيج من البذور (دوار الشمس، القرع، السمسم) لتغذية متكاملة.",
+    "price": 45,
+    "image": "https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEgId_pq8LsLVPtLjUyD_3wLSPprqgcjgRvyYZiYtd6hG_pwuj3UxK0b1cmyd903aQjSKiLzrMldJ8keEoFM9pn30VaXdPY9g4Ylh64CPCkx_Z2QjkP3b9WtaTXcUeEIE-fgGJNmtpiovp5hdKzK4RHOI8439mMdQc48NZhBM31aETrWNThP0qmbXmBMlAg/s947/mix-graines.webp",
+    "category": "Graines",
+    "weight": "250 g"
+  },
+  {
+    "id": 38,
+    "name": "Ail en poudre",
+    "description_fr": "Ail déshydraté en poudre, pratique pour assaisonner vos plats.",
+    "description_ar": "ثوم مجفف ومطحون، عملي لتتبيل أطباقك.",
+    "price": 30,
+    "image": "https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEiH6lYOlchvo88KElNDc_Kekkhl3kL67WeqfeA2fSk7yj84x6JkIrD11ihOM7w2Hy730zcwi0Qaqv0J3CK2FMbtOtdxKx1RUQlCzOa-G7Y1UtTZoSb4yrp-vNigLTlPK63z5LSqozW_lhflTPiJa3Y-UOYDR7trAiXPLBl5_RXytAb8B2sZKYfE8oGq0z8/s947/ail-en-poudre.webp",
+    "category": "Épices & Aromates",
+    "weight": "100 g"
+  },
+  {
+    "id": 39,
+    "name": "Cannelle moulue",
+    "description_fr": "Cannelle de Ceylan moulue, au goût doux et sucré. Idéale pour pâtisseries et boissons.",
+    "description_ar": "قرفة سيلان المطحونة، بنكهة حلوة وناعمة. مثالية للمعجنات والمشروبات.",
+    "price": 40,
+    "image": "https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEiBB0dpukXE5zaL2Pw99go2CXuQxxO1ZqR1FMyk5mMv6GzNMS1KDCbVNEOj_TmE7LZjoTgxO0WioZVqoGOMZsOuNuBS46MyTBEnthSytlP2VXJQZYCrzVktsaH3HnhiTlZXUQdZe8zic44u1HEDyNCtux81CLo8l6F2G1hMmNgdt6xt0sfC3vQHyIZRma4/s947/cannelle-moulue.webp",
+    "category": "Épices & Aromates",
+    "weight": "100 g"
+  },
+  {
+    "id": 40,
+    "name": "Coriandre moulue",
+    "description_fr": "Coriandre en poudre, au parfum frais et légèrement citronné.",
+    "description_ar": "كزبرة مطحونة، برائحة منعشة وليمونية خفيفة.",
+    "price": 25,
+    "image": "https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEhM2bpCrRZoEUlAr0HJVAhTzA9G2DDRsad15-tLh54bF9YKWJ_xZsIamn7uHOoKY3pNZSOHEicX5VFDAsdDzlOdv-CZqaeOMje1_TR4fDdDXROHuxr_GVqEg3h3A65vCN19P3yKOSgSr6yyqyf2iNzKaxcProFs6r4V_kCxS8W0Tv98m6GwXFmwCZoV_0w/s947/coriandre-moulue.webp",
+    "category": "Épices & Aromates",
+    "weight": "100 g"
+  },
+  {
+    "id": 41,
+    "name": "Cumin beldi",
+    "description_fr": "Cumin beldi (traditionnel marocain), au goût puissant et aromatique.",
+    "description_ar": "كمون بلدي مغربي تقليدي، بنكهة قوية وعطرية.",
+    "price": 30,
+    "image": "https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEjUgxc7NlJbOH-afpCoNdZykhMpmKyX82Y3LfiCSZ96opD4_KVs4CfHZ9GWIKQBxe5TE3EBIKDQmcEdaAFw2N6gYHyz2N52YztNe1tJm5MrffXEcKzFIilF1VqR0GjbiCtYVcyHuVuOWe2qznuogp7Rr42fNYkipdr_tPgcUVZRQT65kl0O3YFVY_ZI4ZY/s947/cumin-beldi.webp",
+    "category": "Épices & Aromates",
+    "weight": "100 g"
+  },
+  {
+    "id": 42,
+    "name": "Curcuma",
+    "description_fr": "Curcuma moulu, aux propriétés anti-inflammatoires et antioxydantes.",
+    "description_ar": "كركم مطحون، بخصائص مضادة للالتهابات ومضادة للأكسدة.",
+    "price": 40,
+    "image": "https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEiYDC2cekenQleUjHU2ayzokdA_3egCZvqMTz4GUzE3OLuijn8cUAXysIqqSBq7oIkcbqeHOTCAiKbtFkrfVbd17FZ-0UBsKID4HZR4VkwfIXqWL1hH-B94ndlbTbHKEYQ0UndRTSWpaaVqfSjWuLxOa6fcCnG2O6irXHUMjPdnFtRrW1Bzu9F709vJQxk/s947/curcuma.webp",
+    "category": "Épices & Aromates",
+    "weight": "100 g"
+  },
+  {
+    "id": 43,
+    "name": "Épices café du Maroc",
+    "description_fr": "Mélange d'épices pour parfumer le café à la marocaine (cardamome, cannelle, etc.).",
+    "description_ar": "خليط توابل لتطييب القهوة المغربية (هيل، قرفة...).",
+    "price": 35,
+    "image": "https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEgiT3TqIAV3K6_Ng7c35X2IJ7Y32jnhS_AeaSURpxRINTGbp4FaxpDDmzEykJ6WHKAac6YRNArDkomNIOqUlhzOCkLA_fmn2nmiLbqZGckO5suZrdSyd_U_xisYFef9nDacxBvhGdaq5qMlwME04IlEKsApz7-aPxn4HS1uDaTuyOJPVSAoXGUOff4GFH4/s947/epices-cafe-du-maroc.webp",
+    "category": "Épices & Aromates",
+    "weight": "100 g"
+  },
+  {
+    "id": 44,
+    "name": "Épices chawarma",
+    "description_fr": "Mélange d'épices pour chawarma (cumin, paprika, curcuma, etc.).",
+    "description_ar": "خليط توابل للشاورما (كمون، بابريكا، كركم...).",
+    "price": 35,
+    "image": "https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEh5SR4wvWuGkK6FGNAfTz2Zv9o3FYpBiFUcse3PftmT_X6Kx3TspPtinzbWee-s6vfMGuaqdFi-D9bpxrCkLoliy8sLkTn1UafrV5FEjsflbTbi2ORL_qBAs12XK3xQSjnU_9nOxtX5-Uv3vZzHBjgoAwv6R1HaL5-om2rl-fDOjxIer8rRmvosW6yizqI/s947/epices-chawarma.webp",
+    "category": "Épices & Aromates",
+    "weight": "100 g"
+  },
+  {
+    "id": 45,
+    "name": "Épices couscous",
+    "description_fr": "Mélange typique pour couscous (curcuma, gingembre, poivre, etc.).",
+    "description_ar": "خليط تقليدي للكسكس (كركم، زنجبيل، فلفل...).",
+    "price": 35,
+    "image": "https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEhiCD1DK_kWgDyRS761QePEwA8tSpMIRz6kOBZ_tqHSb6ea9qBh2R-gufe-DbZmg7646quYeyPTIAUazqMIMLdeQFH3v27OnZFP49A4RaAuyIHfREUrGXdN1iQDmvAkFpQpqv1r7PUblmnhWMSR7X_jUVWB0bTQmna3JLJyY9LXd-pGwZpxVgu4Wn4P3_g/s947/epices-couscous.webp",
+    "category": "Épices & Aromates",
+    "weight": "100 g"
+  },
+  {
+    "id": 46,
+    "name": "Épices mrouzia",
+    "description_fr": "Mélange d'épices pour mrouzia (plat sucré-salé à base de miel et de viande).",
+    "description_ar": "خليط توابل للمروزية (طبق حلو مالح بالعسل واللحم).",
+    "price": 35,
+    "image": "https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEitjx9l2XnwHKTTW__zDSRdMybTPYZN-R3vMHhM0F7yhoOlnBNv1UtO_oYLl5DeoS_m_5wdIuaqHUZIqzMRUQlv0sbxGfL7nguNa4bz4BB1BsLyGCO6wHEnwFAZw665q4H8UP4kvys_iGaDBVEtvApdf5IHFP5Rm97FC97q8qH1iokPkTZYj-2EuKMh8io/s947/epices-mrouzia.webp",
+    "category": "Épices & Aromates",
+    "weight": "100 g"
+  },
+  {
+    "id": 47,
+    "name": "Épices pastilla au poisson",
+    "description_fr": "Mélange d'épices pour pastilla au poisson (coriandre, cumin, paprika doux...).",
+    "description_ar": "خليط توابل لالباستيلا بالسمك (كزبرة، كمون، بابريكا حلوة...).",
+    "price": 35,
+    "image": "https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEgQEEJH6XcHg4df0ajL0ZrOpFBKF0Z4AyYwtz0ZTcKzOCfmOtcTLv2n5vI-TrguZvx5M1FOVWHqrOGNwSuwXtETD-mCPeMpuqZdH2Z5DB5EEZXEoO2BRZFeHRP-HCrOJCZk8wOkHztllmB_cRTbVAzHbcWpOG8Lqp4gPSMj6g30Z7FxMvOkrmquI0CzKOI/s947/epices-pastilla-au-poisson.webp",
+    "category": "Épices & Aromates",
+    "weight": "100 g"
+  },
+  {
+    "id": 48,
+    "name": "Épices pastilla au poulet",
+    "description_fr": "Mélange d'épices pour pastilla au poulet (cannelle, gingembre, safran...).",
+    "description_ar": "خليط توابل لالباستيلا بالدجاج (قرفة، زنجبيل، زعفران...).",
+    "price": 35,
+    "image": "https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEgrArzExHRWYLQG70EDs9MF_-dGvoZJscV8X9WmR0MJjFfLXa-Qu1aqdNIYJS98PFJXzCtawCgt9OnN7ZlpkvbWIrc3cEnPL2GLnond-99RG5QrSLmTvv86LFX3lbA1rfVUnsvyamquuY4IiMrfBRk3bpPi8b3QdXSSkQQnlSY3IDkRNUduRV13E7yxyrQ/s947/epices-pastilla-au-poulet.webp",
+    "category": "Épices & Aromates",
+    "weight": "100 g"
+  },
+  {
+    "id": 49,
+    "name": "Épices pour kefta",
+    "description_fr": "Mélange d'épices pour kefta (viande hachée) : cumin, paprika, persil...",
+    "description_ar": "خليط توابل للكفتة (لحم مفروم): كمون، بابريكا، بقدونس...",
+    "price": 30,
+    "image": "https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEiT6dR93RIIACBoSmkL4ei9qGge8f2Uc9VS7rTXpNhyphenhyphenSdGwqPoKD2kfZNdowLmAuJnOD3oJ2vjzQmhBR_gBvtRxyEqoR4__aKAhmbEL90cpPne57mpa8xtKoWGutsKytw7Grb8eDAQp4h6HV_2PuMvfNY69BoCe26O5M7E6Fx838AXofn8RsLtob3slwGg/s947/epices-pour-kefta.webp",
+    "category": "Épices & Aromates",
+    "weight": "100 g"
+  },
+  {
+    "id": 50,
+    "name": "Épices pour poisson",
+    "description_fr": "Mélange d'épices spécial poisson (cumin, coriandre, curcuma, poivre).",
+    "description_ar": "خليط توابل خاص بالسمك (كمون، كزبرة، كركم، فلفل).",
+    "price": 30,
+    "image": "https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEjbTdbhhgQziWPxuFSn3kN5tnoQu5VkB72XJaRRDB3CjDD7rfyigsaQea0R8m2UiFhCwHcRFqb5P8xRp-4efJ7sXy6Fag_QsamW8xDxWk2lz0m4qEQIyEyUaEOCbGE8pAFkV7qRefKHWvDja1QQrFX4atiIfA4Ptaybf2Z1tiGa7em4LHFStqTgJeuBvyM/s947/epices-pour-poisson.webp",
+    "category": "Épices & Aromates",
+    "weight": "100 g"
+  },
+  {
+    "id": 51,
+    "name": "Épices pour poulet",
+    "description_fr": "Mélange d'épices pour poulet (gingembre, curcuma, poivre, paprika).",
+    "description_ar": "خليط توابل للدجاج (زنجبيل، كركم، فلفل، بابريكا).",
+    "price": 30,
+    "image": "https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEhNgm0KsFsl89T_sYS-C1V2Ylu1uRwMmo5wTxVKBkcOeB8NdwsjKzUxGBUb9LIxfMd9tfQK4AVj4GZx6H-GyH_i1sClXQ1U1BxoI49dVXZYbT1yyJ0S2hwVIcLrxF7YLQVUAf_94hHRNgQyJH7SJ_g6Oek5nm2QF_9JTDLT2cSqooLXGn4GxjiSFa7nYZs/s947/epices-pour-poulet.webp",
+    "category": "Épices & Aromates",
+    "weight": "100 g"
+  },
+  {
+    "id": 52,
+    "name": "Épices pour viande",
+    "description_fr": "Mélange d'épices pour viande rouge (cumin, coriandre, poivre, paprika).",
+    "description_ar": "خليط توابل للحوم الحمراء (كمون، كزبرة، فلفل، بابريكا).",
+    "price": 30,
+    "image": "https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEjDdiUFoI1oBhgrgzY8euDFYmBJMCi_A5yVVetRbI42ibtomx3sHX744yk8ccfK4Jq_fWrFRSIaDoLQ2AdMQoRzVXl16-ivuDfpjp9MQU_V57R7w9OLK-lXwl5-k049w0BrHqivyqx2DjUZx5VVEXnLU6-JjPnu0B9Gar4qSnaQmJaW7NNJ6GWAhOOhT-M/s947/epices-pour-viande.webp",
+    "category": "Épices & Aromates",
+    "weight": "100 g"
+  },
+  {
+    "id": 53,
+    "name": "Épices salade marocaine",
+    "description_fr": "Mélange d'épices pour salades marocaines (cumin, paprika, sel, poivre).",
+    "description_ar": "خليط توابل للسلطات المغربية (كمون، بابريكا، ملح، فلفل).",
+    "price": 30,
+    "image": "https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEgJVTcwIefNX-Si_C2EVXcT5FcCQk7az05oZuHbPe6KYN9bjmXyHHa3gZ1nqyHLILXmviYFH7b9tJpT9LdY5remXLxMjKDIJcLhIg5OUnETLLuz-7GFumjNc9Q73ezL2bu6YYp2bw9z7OujyKow-as2H_wjU-I7-ZLvAVlidC42l5zFspCcrThzrqQTVjE/s947/epices-salade-marocaine.webp",
+    "category": "Épices & Aromates",
+    "weight": "100 g"
+  },
+  {
+    "id": 54,
+    "name": "Gingembre moulu",
+    "description_fr": "Gingembre en poudre, au goût piquant et chaud. Idéal en cuisine et en tisane.",
+    "description_ar": "زنجبيل مطحون، بنكهة حارة ودافئة. مثالي في الطهي والشاي.",
+    "price": 35,
+    "image": "https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEiNc_0CkwL-DXl0I6teub50-H4Bjs_C4t7W3JzIACBMEQfOihbHHaBfJLDyRmdXNNgWZMiVaCnPFmv5A49dbbNo12DSwRKHaSnrGyz0ODptUI4-UFPwy97_kP-AZynUl1suRfw9-DQJ83XYNAbn7tHV5hPWiJST_m3-7viAtTOu-2CQUdhk0jAangEyXOI/s947/gingembre-moulu.webp",
+    "category": "Épices & Aromates",
+    "weight": "100 g"
+  },
+  {
+    "id": 55,
+    "name": "Origan",
+    "description_fr": "Origan séché, aromatique et parfumé. Parfait pour pizzas, sauces et marinades.",
+    "description_ar": "زعتر بري مجفف، عطري ومنكه. مثالي للبيتزا والصلصات والتتبيلات.",
+    "price": 30,
+    "image": "https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEg6K8TcM4mhbiS27RRqoIOrBj9iP5F8ZupvNSlD2oZ31ztVril_ayYQek54YhUOPrA5LWupmEoN6i8oPpFMOGBz6MYSr2VB44iplmM9ZKxbt9aeHFRBnys9uZJBFVuXzh-aAXfARWjEgomUXeKyeeQ9Gn8Bd01FjmNUrPqq4IAGDM9VEGCH_zAj84MPaI0/s947/origan.webp",
+    "category": "Épices & Aromates",
+    "weight": "50 g"
+  },
+  {
+    "id": 56,
+    "name": "Paprika",
+    "description_fr": "Paprika doux, pour donner couleur et saveur à vos plats.",
+    "description_ar": "بابريكا حلوة، لإضفاء اللون والنكهة على أطباقك.",
+    "price": 25,
+    "image": "https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEi5042w4sNEks7h7jLrbBOGC5qkyjKXUq7FPDTIrWWhJ4w-KX9utZqn2mZYLXTD9QU1yIAaUMGX6tUBz7VKzI4nJeiV9B_oA_xcVy0LLmlQm-8doHi7qg50tgktmcqKDzFtccSCUEC6gfQTZ8VH5tENN3OWKxSxTodYZaFUxZJxLopKKuYdI0eqPT72DRI/s947/paprika.webp",
+    "category": "Épices & Aromates",
+    "weight": "100 g"
+  },
+  {
+    "id": 57,
+    "name": "Piment doux fumé",
+    "description_fr": "Piment doux fumé, arôme intense et légèrement fumé. Rehausse les grillades.",
+    "description_ar": "فلفل حلو مدخن، نكهة قوية ومدخنة خفيفة. يعزز نكهة المشاوي.",
+    "price": 35,
+    "image": "https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEhar3F5pj6Wqqcki1qNwJJCtIUc6XLjZJUx70iYjtjp0nf0SRqKAmAUuxseiXXV5JWCZ2ZSZERVyN8XE90EZgSf64_L58XiIVG1S8Gh4lYTZgLI50KSrI7o3O1b5dr7xDL6IWqiZrC-Pi_EAy2wo6XlXQNToSXS6VgYfQ89y-n1otaCIvz01XZSmCyKcP8/s947/piment-doux-fume.webp",
+    "category": "Épices & Aromates",
+    "weight": "100 g"
+  },
+  {
+    "id": 58,
+    "name": "Piment fort",
+    "description_fr": "Piment fort en poudre, pour les amateurs de saveurs épicées.",
+    "description_ar": "فلفل حار مطحون، لعشاق النكهات الحارة.",
+    "price": 30,
+    "image": "https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEjRgPbjNnyVyl-TXufw-anMDE_0_TlySwQPpLBq5E5uuyi4Fb8XKRbHCC0pUb3st13G4yh1gfRQPMTDOZXN4QBz0yUn4KxynLrtA_JBF08we197Rm_Gb0sCn6HqK9wSO1tqsJM4TN5Ie6yAqSWusrAtfm5tPcjj7mExXnNNOL2jRd_Mj-mDH6qzHW_8smU/s947/piment-fort.webp",
+    "category": "Épices & Aromates",
+    "weight": "100 g"
+  },
+  {
+    "id": 59,
+    "name": "Poivre noir moulu",
+    "description_fr": "Poivre noir moulu, au goût piquant et aromatique. Indispensable en cuisine.",
+    "description_ar": "فلفل أسود مطحون، بنكهة حارة وعطرية. أساسي في المطبخ.",
+    "price": 30,
+    "image": "https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEh47iJP30Q39OC_ZeyZpl3jQgieyfFcqMHQx_P-4mZjcjm2EKqgk29wIy4NNpKoTO9AyoQVTAocBiIr1uXQT7xXMJW5Xxyn11X5tN2lSg1PLBEYNS6UOs9cJJiny4FrcvsZurxiUleHFIhnvFmOeSgAi0sxtUoST-LK6heSjSMHALcUWBW0z7iEaP_fA3E/s947/poivre-noir-moulu.webp",
+    "category": "Épices & Aromates",
+    "weight": "100 g"
+  },
+  {
+    "id": 60,
+    "name": "Ras el hanout",
+    "description_fr": "Mélange emblématique d'épices marocaines (cannelle, cumin, gingembre, curcuma, etc.).",
+    "description_ar": "خليط التوابل المغربي الشهير (قرفة، كمون، زنجبيل، كركم...).",
+    "price": 45,
+    "image": "https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEhLQmTZK4UZEwmsfq9LtkMQM4V42Mta2EUD2kgRdExf5NtLU6EJ02Wh04jHou5MEbSiAdMrYMSkKbs8TQgYx0rPEZcynA9c2TMV1PUzzzvxOLa-zovqedxmiD6xN5IVVbCnGZJOVgeSAEbxHfwsHLGSKWlwFKjXXkAj0fJVSSFsCb3FoLKWnnoitXTw7IE/s947/ras-el-hanout.webp",
+    "category": "Épices & Aromates",
+    "weight": "100 g"
+  },
+  {
+    "id": 61,
+    "name": "Romarin",
+    "description_fr": "Romarin séché, aux arômes résineux et puissants. Idéal pour les grillades et infusions.",
+    "description_ar": "إكليل الجبل المجفف، برائحة راتنجية قوية. مثالي للمشاوي والمنقوعات.",
+    "price": 30,
+    "image": "https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEj52XVEBT4cWTwupL-KHvvXF6O-l9tW0dwvyBbk2f240R_HqVRd3z4AlqvObE8P0iVQkUQt-C4Fc9C2u1D9s59i9p1lWCTRokyln49K7qZ9DOiYS6WfHIDBCi6t5HGnoEiARMeS6lTcoHch3nGBY2WyHGrubnFooT2x0YH_x1Fk8VCm-kzMOwuayXQvUm8/s947/romarin.webp",
+    "category": "Épices & Aromates",
+    "weight": "50 g"
+  },
+  {
+    "id": 62,
+    "name": "Safran pur",
+    "description_fr": "Safran pur, précieuse épice au goût et à la couleur incomparables. Paiement en stigmates.",
+    "description_ar": "زعفران نقي، توابل ثمينة ذات طعم ولون فريدان. يباع على شكل مياسم.",
+    "price": 180,
+    "image": "https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEhDg6RVct9Sqmqa7LlRLnUrTt_CeqJVncyR9QO8KV8UZjXwuT7gFFQBcXk26LY2p22Vov7z9Ys7prwvdai5gTbLWel-iXKHH8uTJdKdam4r7-tJfj2ZTjALpU4FMc3ht5nRNwKT8jJEpGAaPSYO_dGnqikZXxGBI7aEnOdcOSJ1cBP0KH85NApVyDwJzOw/s947/safran-pur.webp",
+    "category": "Épices & Aromates",
+    "weight": "1 g"
+  },
+  {
+    "id": 63,
+    "name": "Thym",
+    "description_fr": "Thym séché, aux arômes puissants et médicinaux. Parfait pour les marinades et infusions.",
+    "description_ar": "زعتر مجفف، برائحة قوية وطبية. مثالي للتتبيلات والمنقوعات.",
+    "price": 30,
+    "image": "https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEiCfW1OSCuCU0HBgWz3__6tu5GTLo9sY2Mn8zKfEgOsyEPsCqYLofTPtvVdh7R2h_AEZwJxAHE0Ou_31A_yRLTDcvg9ubq73WYI3n2LK335q6NuLakQ2w7YFhZ-ymGaxsTybPr_rHd_jPG0a59NI2eIPMxKZTwUV2p2JS6iPqfdEZZVuxit-mnrxqbU3Ik/s947/thym.webp",
+    "category": "Épices & Aromates",
+    "weight": "50 g"
   }
 ]

@@ -616,131 +616,194 @@ function initCatalogueBtn() {
   document.getElementById("catalogue-btn")?.addEventListener("click", downloadCatalogue);
 }
 
+/**
+ * Charge une image distante et retourne une dataURL.
+ * @param {string} url - L'URL de l'image.
+ * @returns {Promise<string>} - Promesse résolue avec la dataURL.
+ */
+function loadImageAsDataURL(url) {
+  return new Promise((resolve, reject) => {
+    const img = new Image();
+    img.crossOrigin = "Anonymous"; // Pour éviter les problèmes CORS (si l'image l'autorise)
+    img.onload = () => {
+      const canvas = document.createElement("canvas");
+      canvas.width = img.width;
+      canvas.height = img.height;
+      const ctx = canvas.getContext("2d");
+      ctx.drawImage(img, 0, 0);
+      const dataURL = canvas.toDataURL("image/jpeg", 0.8); // format JPEG pour réduire la taille
+      resolve(dataURL);
+    };
+    img.onerror = (err) => {
+      console.warn(`Impossible de charger l'image : ${url}`);
+      // Retourne un placeholder en dataURL
+      resolve("https://via.placeholder.com/400x300/F5EDD8/C1440E?text=Image+indisponible");
+    };
+    img.src = url;
+  });
+}
+
+/**
+ * Génère le catalogue PDF avec une grille de produits :
+ * - 3 produits par ligne
+ * - 5 lignes par page (soit 15 produits par page)
+ * - Chaque produit affiche : image, nom, prix, poids
+ */
 async function downloadCatalogue() {
+  // Attendre que jsPDF soit chargé
   if (typeof window.jspdf === "undefined") {
-    showToast("Bibliothèque PDF en chargement…", "");
-    // jsPDF is loaded from CDN in index.html
-    await waitForjsPDF();
+    showToast("Chargement de la bibliothèque PDF…", "");
+    try {
+      await waitForjsPDF();
+    } catch (err) {
+      showToast("Erreur de chargement du PDF", "error");
+      return;
+    }
   }
+
+  // Vérifier que les produits sont disponibles
+  if (!products || products.length === 0) {
+    showToast("Aucun produit à afficher dans le catalogue.", "error");
+    return;
+  }
+
+  showToast("Préparation des images… (peut prendre quelques secondes)", "");
+
+  // Charger toutes les images en dataURL pour les inclure dans le PDF
+  const productImages = await Promise.all(products.map(p => loadImageAsDataURL(p.image)));
 
   const { jsPDF } = window.jspdf;
   const doc = new jsPDF({ unit: "mm", format: "a4", orientation: "portrait" });
 
-  const pageW  = doc.internal.pageSize.getWidth();
-  const margin = 15;
-  const colW   = pageW - margin * 2;
+  const pageW  = doc.internal.pageSize.getWidth();   // 210 mm pour A4
+  const margin = 15;                                 // marges gauche/droite
+  const colW   = (pageW - 2 * margin) / 3;           // largeur de chaque colonne
+  const imgW   = colW - 8;                           // largeur de l'image (avec un peu de padding)
+  const imgH   = 35;                                 // hauteur de l'image (adaptée)
+  const rowH   = imgH + 28;                          // hauteur totale d'une ligne (image + texte)
+  const rowsPerPage = 5;                             // 5 lignes par page
+  const productsPerPage = rowsPerPage * 3;           // 15 produits par page
 
-  // ── Cover page ──
-  doc.setFillColor(193, 68, 14);
-  doc.rect(0, 0, pageW, 70, "F");
-  doc.setFillColor(139, 46, 8);
-  doc.rect(0, 60, pageW, 10, "F");
+  // --- Page de garde (identique à l'original, avec quelques ajustements) ---
+  function addCoverPage() {
+    doc.setFillColor(193, 68, 14);
+    doc.rect(0, 0, pageW, 70, "F");
+    doc.setFillColor(139, 46, 8);
+    doc.rect(0, 60, pageW, 10, "F");
 
-  doc.setTextColor(255, 255, 255);
-  doc.setFontSize(28);
-  doc.setFont("helvetica", "bold");
-  doc.text("TIZWIT", pageW / 2, 28, { align: "center" });
+    doc.setTextColor(255, 255, 255);
+    doc.setFontSize(28);
+    doc.setFont("helvetica", "bold");
+    doc.text("TIZWIT", pageW / 2, 28, { align: "center" });
 
-  doc.setFontSize(11);
-  doc.setFont("helvetica", "normal");
-  doc.text("Coopérative Artisanale du Terroir Marocain", pageW / 2, 38, { align: "center" });
-  doc.text("Catalogue de Produits — " + new Date().getFullYear(), pageW / 2, 48, { align: "center" });
+    doc.setFontSize(11);
+    doc.setFont("helvetica", "normal");
+    doc.text("Coopérative Artisanale du Terroir Marocain", pageW / 2, 38, { align: "center" });
+    doc.text("Catalogue de Produits — " + new Date().getFullYear(), pageW / 2, 48, { align: "center" });
 
-  // gold ornament line
-  doc.setDrawColor(212, 168, 71);
-  doc.setLineWidth(0.8);
-  doc.line(margin, 56, pageW - margin, 56);
+    doc.setDrawColor(212, 168, 71);
+    doc.setLineWidth(0.8);
+    doc.line(margin, 56, pageW - margin, 56);
 
-  // intro text
-  doc.setTextColor(43, 27, 16);
-  doc.setFontSize(9);
-  doc.setFont("helvetica", "normal");
-  const intro = "Découvrez notre sélection de produits authentiques, issus des terroirs marocains, produits par les femmes artisanes de notre coopérative dans le respect des traditions ancestrales.";
-  const introLines = doc.splitTextToSize(intro, colW);
-  doc.text(introLines, margin, 82);
+    doc.setTextColor(43, 27, 16);
+    doc.setFontSize(9);
+    doc.setFont("helvetica", "normal");
+    const intro = "Découvrez notre sélection de produits authentiques, issus des terroirs marocains, produits par les femmes artisanes de notre coopérative dans le respect des traditions ancestrales.";
+    const introLines = doc.splitTextToSize(intro, pageW - 2 * margin);
+    doc.text(introLines, margin, 82);
+  }
 
-  // ── Product pages ──
-  let y = 100;
-  const lineH = 6;
+  addCoverPage();
 
-  products.forEach((p, i) => {
-    // New page if needed
-    if (y > 250) {
-      doc.addPage();
-      y = 20;
+  // --- Génération des pages produits ---
+  let pageCount = 1;
+  let currentPage = 1;
+  let yStart = 110; // point de départ après la page de garde (suffisamment bas)
+
+  // Fonction pour ajouter une nouvelle page de produits (après la couverture)
+  function addNewProductPage() {
+    doc.addPage();
+    yStart = 20; // en haut de la page
+    currentPage++;
+  }
+
+  // Boucle sur tous les produits
+  for (let i = 0; i < products.length; i++) {
+    const product = products[i];
+    const imgDataURL = productImages[i];
+
+    // Déterminer la position dans la grille
+    const productIndex = i; // index global
+    const pageNumber = Math.floor(productIndex / productsPerPage); // page produit (0 = première page de produits)
+    const positionInPage = productIndex % productsPerPage;
+    const row = Math.floor(positionInPage / 3);      // ligne (0 à rowsPerPage-1)
+    const col = positionInPage % 3;                  // colonne (0,1,2)
+
+    // Calculer la position Y pour cette page
+    let yPos = yStart + row * rowH;
+
+    // Si on dépasse la hauteur disponible, on passe à la page suivante
+    if (yPos + rowH > doc.internal.pageSize.getHeight() - margin) {
+      // On doit ajouter une nouvelle page avant ce produit
+      addNewProductPage();
+      // Recalculer la position pour cette même page (on recommence la grille)
+      const newProductIndex = i;
+      const newPageNumber = Math.floor(newProductIndex / productsPerPage);
+      const newPositionInPage = newProductIndex % productsPerPage;
+      const newRow = Math.floor(newPositionInPage / 3);
+      const newCol = newPositionInPage % 3;
+      yPos = yStart + newRow * rowH;
     }
 
-    // Product block background
-    const blockH = 42;
-    doc.setFillColor(245, 237, 216);
-    doc.roundedRect(margin, y, colW, blockH, 3, 3, "F");
+    const xPos = margin + col * colW;
 
-    // Category chip
-    doc.setFillColor(193, 68, 14);
-    doc.roundedRect(margin + 4, y + 4, 36, 5, 1, 1, "F");
-    doc.setTextColor(255, 255, 255);
-    doc.setFontSize(6);
-    doc.setFont("helvetica", "bold");
-    doc.text(p.category.toUpperCase(), margin + 6, y + 7.5);
+    // --- Ajouter l'image ---
+    try {
+      doc.addImage(imgDataURL, "JPEG", xPos + 4, yPos, imgW, imgH, undefined, "FAST");
+    } catch (e) {
+      // Fallback en cas d'erreur d'image
+      doc.setFillColor(245, 237, 216);
+      doc.rect(xPos + 4, yPos, imgW, imgH, "F");
+      doc.setTextColor(193, 68, 14);
+      doc.setFontSize(8);
+      doc.text("Image non disponible", xPos + 4 + imgW/2, yPos + imgH/2, { align: "center" });
+    }
 
-    // Product name
+    // --- Nom du produit ---
     doc.setTextColor(43, 27, 16);
-    doc.setFontSize(11);
+    doc.setFontSize(9);
     doc.setFont("helvetica", "bold");
-    doc.text(p.name, margin + 4, y + 16);
+    const nameLines = doc.splitTextToSize(product.name, imgW);
+    doc.text(nameLines, xPos + 4, yPos + imgH + 3);
 
-    // Weight badge
-    if (p.weight) {
+    // --- Prix ---
+    doc.setTextColor(193, 68, 14);
+    doc.setFontSize(10);
+    doc.setFont("helvetica", "bold");
+    doc.text(`${product.price.toFixed(0)} DHS`, xPos + 4, yPos + imgH + 12);
+
+    // --- Poids ---
+    if (product.weight) {
+      doc.setTextColor(90, 62, 40);
       doc.setFontSize(7);
       doc.setFont("helvetica", "normal");
-      doc.setTextColor(90, 62, 40);
-      doc.text(`[ ${p.weight} ]`, margin + 4, y + 22);
+      doc.text(product.weight, xPos + 4, yPos + imgH + 18);
     }
+  }
 
-    // Description (truncated)
-    doc.setFontSize(7.5);
-    doc.setTextColor(90, 62, 40);
-    doc.setFont("helvetica", "normal");
-    const descLines = doc.splitTextToSize(p.description, colW - 60);
-    doc.text(descLines.slice(0, 3), margin + 4, y + 29);
-
-    // Price (right-aligned)
-    doc.setFontSize(14);
-    doc.setFont("helvetica", "bold");
-    doc.setTextColor(193, 68, 14);
-    doc.text(`${p.price.toFixed(0)} DHS`, pageW - margin - 4, y + 20, { align: "right" });
-
-    // Badge
-    if (p.badge) {
-      doc.setFillColor(232, 160, 32);
-      doc.roundedRect(pageW - margin - 30, y + 26, 26, 5, 2, 2, "F");
-      doc.setFontSize(6);
-      doc.setTextColor(43, 27, 16);
-      doc.setFont("helvetica", "bold");
-      doc.text(p.badge.toUpperCase(), pageW - margin - 17, y + 29.5, { align: "center" });
-    }
-
-    // Separator line
-    doc.setDrawColor(212, 168, 71);
-    doc.setLineWidth(0.3);
-    doc.line(margin, y + blockH + 2, pageW - margin, y + blockH + 2);
-
-    y += blockH + 8;
-  });
-
-  // ── Footer note ──
-  if (y > 250) { doc.addPage(); y = 20; }
-  y += 5;
+  // --- Ajouter une page finale avec les informations de contact ---
+  doc.addPage();
+  const finalY = 70;
   doc.setFillColor(44, 85, 69);
-  doc.rect(margin, y, colW, 28, "F");
+  doc.rect(margin, finalY, pageW - 2*margin, 28, "F");
   doc.setTextColor(255, 255, 255);
   doc.setFontSize(8);
   doc.setFont("helvetica", "bold");
-  doc.text("Commander via WhatsApp", pageW / 2, y + 8, { align: "center" });
+  doc.text("Commander via WhatsApp", pageW / 2, finalY + 8, { align: "center" });
   doc.setFont("helvetica", "normal");
   doc.setFontSize(7);
-  doc.text(`wa.me/${WHATSAPP_NUMBER}`, pageW / 2, y + 14, { align: "center" });
-  doc.text("Livraison gratuite dès 499 DHS • Produits 100% authentiques", pageW / 2, y + 20, { align: "center" });
+  doc.text(`wa.me/${WHATSAPP_NUMBER}`, pageW / 2, finalY + 14, { align: "center" });
+  doc.text("Livraison gratuite dès 499 DHS • Produits 100% authentiques", pageW / 2, finalY + 20, { align: "center" });
 
   doc.save("TIZWIT_Catalogue_Produits.pdf");
   showToast("Catalogue PDF téléchargé ! 📄", "success");
